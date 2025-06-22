@@ -1,0 +1,96 @@
+{
+  "scored_leads": [
+    {
+      "company": "TechFlow Solutions",
+      "overall_score": 0.92,
+      "icp_fit_score": 0.95,
+      "confidence_score": 0.88,
+      "signal_strength": 0.93,
+      "scoring_breakdown": {
+        "industry_match": 1.0,
+        "size_match": 0.9,
+        "tech_stack_match": 0.95,
+        "growth_signals": 0.9,
+        "contact_quality": 0.85,
+        "recent_activity": 0.95
+      },
+      "priority": "High",
+      "recommended_action": "Immediate outreach",
+      "confidence_factors": [
+        "Verified email addresses",
+        "Recent funding announcement",
+        "Active hiring in target roles",
+        "Strong tech stack alignment"
+      ]
+    },
+    {
+      "company": "DataStream Analytics",
+      "overall_score": 0.86,
+      "icp_fit_score": 0.85,
+      "confidence_score": 0.87,
+      "signal_strength": 0.86,
+      "scoring_breakdown": {
+        "industry_match": 0.8,
+        "size_match": 0.85,
+        "tech_stack_match": 0.9,
+        "growth_signals": 0.85,
+        "contact_quality": 0.9,
+        "recent_activity": 0.8
+      },
+      "priority": "High",
+      "recommended_action": "Schedule discovery call",
+      "confidence_factors": [
+        "Healthcare industry expertise",
+        "Strong leadership team",
+        "Recent compliance achievements",
+        "Growing customer base"
+      ]
+    },
+    {
+      "company": "CloudScale Technologies",
+      "overall_score": 0.89,
+      "icp_fit_score": 0.9,
+      "confidence_score": 0.88,
+      "signal_strength": 0.89,
+      "scoring_breakdown": {
+        "industry_match": 0.95,
+        "size_match": 0.85,
+        "tech_stack_match": 0.9,
+        "growth_signals": 0.95,
+        "contact_quality": 0.85,
+        "recent_activity": 0.85
+      },
+      "priority": "High",
+      "recommended_action": "Enterprise approach",
+      "confidence_factors": [
+        "Large Series B funding",
+        "Enterprise security compliance",
+        "Financial services focus",
+        "Experienced founding team"
+      ]
+    },
+    {
+      "company": "InnovateRetail",
+      "overall_score": 0.78,
+      "icp_fit_score": 0.75,
+      "confidence_score": 0.8,
+      "signal_strength": 0.8,
+      "scoring_breakdown": {
+        "industry_match": 0.7,
+        "size_match": 0.8,
+        "tech_stack_match": 0.75,
+        "growth_signals": 0.85,
+        "contact_quality": 0.75,
+        "recent_activity": 0.8
+      },
+      "priority": "Medium",
+      "recommended_action": "Nurture campaign",
+      "confidence_factors": [
+        "Rapid customer growth",
+        "AI/ML technology focus",
+        "Series A funding secured",
+        "Active product development"
+      ]
+    }
+  ]
+}

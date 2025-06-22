@@ -1,0 +1,105 @@
+{
+  "analytics": {
+    "overview": {
+      "total_workflows_run": 1247,
+      "total_leads_generated": 15624,
+      "avg_conversion_rate": 0.23,
+      "avg_pipeline_velocity": "14.2 days",
+      "top_performing_workflow": "standard-b2b"
+    },
+    "workflow_performance": [
+      {
+        "workflow_id": "standard-b2b",
+        "name": "Standard B2B Lead Generation",
+        "runs": 456,
+        "success_rate": 0.87,
+        "avg_execution_time": "2.3 minutes",
+        "leads_generated": 8934,
+        "conversion_rate": 0.28,
+        "roi": 4.2
+      },
+      {
+        "workflow_id": "enterprise-sales",
+        "name": "Enterprise Sales Pipeline", 
+        "runs": 178,
+        "success_rate": 0.94,
+        "avg_execution_time": "4.1 minutes",
+        "leads_generated": 2156,
+        "conversion_rate": 0.42,
+        "roi": 7.8
+      },
+      {
+        "workflow_id": "startup-outreach",
+        "name": "Startup & SMB Outreach",
+        "runs": 613,
+        "success_rate": 0.82,
+        "avg_execution_time": "1.8 minutes",
+        "leads_generated": 4534,
+        "conversion_rate": 0.15,
+        "roi": 2.9
+      }
+    ],
+    "agent_performance": [
+      {
+        "agent": "Exa Discovery",
+        "success_rate": 0.91,
+        "avg_response_time": "1.2 seconds",
+        "companies_discovered": 12456,
+        "accuracy_score": 0.88
+      },
+      {
+        "agent": "Phind Signals",
+        "success_rate": 0.85,
+        "avg_response_time": "2.1 seconds",
+        "signals_extracted": 8934,
+        "accuracy_score": 0.82
+      },
+      {
+        "agent": "Perplexity Contacts",
+        "success_rate": 0.79,
+        "avg_response_time": "3.4 seconds",
+        "contacts_found": 5678,
+        "accuracy_score": 0.76
+      }
+    ],
+    "crm_sync_stats": {
+      "hubspot": {
+        "syncs_completed": 1245,
+        "success_rate": 0.96,
+        "leads_synced": 7892,
+        "avg_sync_time": "45 seconds"
+      },
+      "salesforce": {
+        "syncs_completed": 234,
+        "success_rate": 0.93,
+        "leads_synced": 1456,
+        "avg_sync_time": "52 seconds"
+      },
+      "pipedrive": {
+        "syncs_completed": 156,
+        "success_rate": 0.89,
+        "leads_synced": 789,
+        "avg_sync_time": "38 seconds"
+      }
+    },
+    "lead_quality_metrics": {
+      "avg_lead_score": 0.74,
+      "score_distribution": {
+        "90-100": 234,
+        "80-89": 1567,
+        "70-79": 3456,
+        "60-69": 2890,
+        "50-59": 1234,
+        "below_50": 567
+      },
+      "qualification_rate": 0.68,
+      "contact_accuracy": 0.83
+    },
+    "pipeline_velocity": {
+      "avg_time_to_contact": "2.1 days",
+      "avg_time_to_qualify": "5.7 days", 
+      "avg_time_to_opportunity": "12.3 days",
+      "avg_time_to_close": "28.5 days"
+    }
+  }
+}

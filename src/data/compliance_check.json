@@ -1,0 +1,40 @@
+{
+  "compliance_results": [
+    {
+      "domain": "techflowsolutions.com",
+      "robots_txt_status": "allowed",
+      "robots_txt_details": "Allows crawling of /about, /careers, /blog pages",
+      "tos_scraping_allowed": true,
+      "tos_summary": "Standard terms, no explicit scraping prohibition",
+      "compliance_score": 0.9,
+      "last_checked": "2024-01-15"
+    },
+    {
+      "domain": "datastreamanalytics.com",
+      "robots_txt_status": "allowed",
+      "robots_txt_details": "Allows general crawling, blocks /admin and /api",
+      "tos_scraping_allowed": true,
+      "tos_summary": "Permits reasonable data collection for business purposes",
+      "compliance_score": 0.95,
+      "last_checked": "2024-01-15"
+    },
+    {
+      "domain": "cloudscaletech.io",
+      "robots_txt_status": "allowed",
+      "robots_txt_details": "Standard crawling allowed, blocks sensitive paths",
+      "tos_scraping_allowed": true,
+      "tos_summary": "No restrictions on public page scraping",
+      "compliance_score": 0.85,
+      "last_checked": "2024-01-15"
+    },
+    {
+      "domain": "innovateretail.com",
+      "robots_txt_status": "allowed",
+      "robots_txt_details": "Open crawling policy for public content",
+      "tos_scraping_allowed": true,
+      "tos_summary": "Allows data collection for legitimate business purposes",
+      "compliance_score": 0.9,
+      "last_checked": "2024-01-15"
+    }
+  ]
+}

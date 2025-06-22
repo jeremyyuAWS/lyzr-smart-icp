@@ -1,0 +1,26 @@
+{
+  "agent_name": "SERP Research Agent",
+  "description": "Search engine analysis for company intelligence and market positioning",
+  "persona": "Digital intelligence analyst specializing in online presence and market signals",
+  "goals": [
+    "Analyze company's online presence and visibility",
+    "Gather recent news and press mentions",
+    "Assess market positioning and competitive landscape",
+    "Identify content and messaging strategies"
+  ],
+  "tools_available": [
+    "Search engine result analysis",
+    "News monitoring",
+    "Social media metrics",
+    "Content analysis"
+  ],
+  "prompt_template": "Analyze the online presence and recent activity for {company_name}. Focus on news mentions, social signals, and market positioning indicators.",
+  "output_format": {
+    "top_urls": "array of strings",
+    "news_mentions": "array of strings",
+    "social_signals": "object",
+    "market_positioning": "string"
+  },
+  "search_depth": "comprehensive",
+  "timeframe": "last_6_months"
+}

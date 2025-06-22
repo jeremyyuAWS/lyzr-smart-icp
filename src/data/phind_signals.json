@@ -1,0 +1,68 @@
+{
+  "signals": [
+    {
+      "company": "TechFlow Solutions",
+      "hiring_signals": [
+        "Senior React Developer - Remote",
+        "DevOps Engineer - AWS/Kubernetes",
+        "Product Manager - B2B SaaS"
+      ],
+      "tech_stack": ["React", "Node.js", "AWS", "MongoDB", "Stripe"],
+      "growth_indicators": [
+        "3x team growth in last 6 months",
+        "New office opening in Austin",
+        "Partnership with Salesforce announced"
+      ],
+      "recent_funding": "$15M Series A",
+      "headcount_growth": "+45% YoY"
+    },
+    {
+      "company": "DataStream Analytics",
+      "hiring_signals": [
+        "Senior Full Stack Developer",
+        "Data Scientist - Healthcare",
+        "Customer Success Manager"
+      ],
+      "tech_stack": ["Python", "React", "PostgreSQL", "AWS", "Docker"],
+      "growth_indicators": [
+        "New enterprise clients onboarded",
+        "HIPAA compliance certification completed",
+        "Product expansion into telehealth"
+      ],
+      "recent_funding": "$8M Seed",
+      "headcount_growth": "+60% YoY"
+    },
+    {
+      "company": "CloudScale Technologies",
+      "hiring_signals": [
+        "Platform Engineer - Kubernetes",
+        "Security Engineer - FinTech",
+        "Solutions Architect"
+      ],
+      "tech_stack": ["Kubernetes", "Go", "React", "PostgreSQL", "Terraform"],
+      "growth_indicators": [
+        "SOC 2 Type II certification",
+        "Multi-region deployment completed",
+        "Banking partnerships established"
+      ],
+      "recent_funding": "$25M Series B",
+      "headcount_growth": "+35% YoY"
+    },
+    {
+      "company": "InnovateRetail",
+      "hiring_signals": [
+        "Machine Learning Engineer",
+        "Frontend Developer - React",
+        "Sales Development Representative"
+      ],
+      "tech_stack": ["Python", "React", "TensorFlow", "AWS", "Redis"],
+      "growth_indicators": [
+        "AI model accuracy improved by 25%",
+        "Integration with major POS systems",
+        "Customer base doubled in Q4"
+      ],
+      "recent_funding": "$12M Series A",
+      "headcount_growth": "+80% YoY"
+    }
+  ]
+}

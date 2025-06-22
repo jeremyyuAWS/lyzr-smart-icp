@@ -1,0 +1,80 @@
+{
+  "contacts": [
+    {
+      "company": "TechFlow Solutions",
+      "contacts": [
+        {
+          "name": "Sarah Chen",
+          "title": "CEO & Co-founder",
+          "email": "sarah@techflowsolutions.com",
+          "linkedin": "linkedin.com/in/sarahchen-tech",
+          "background": "Former VP Engineering at Stripe, Stanford CS"
+        },
+        {
+          "name": "Michael Rodriguez",
+          "title": "VP of Sales",
+          "email": "michael.r@techflowsolutions.com",
+          "linkedin": "linkedin.com/in/mrodriguez-sales",
+          "background": "Ex-Salesforce, 10+ years in B2B SaaS"
+        }
+      ]
+    },
+    {
+      "company": "DataStream Analytics",
+      "contacts": [
+        {
+          "name": "Dr. Emily Watson",
+          "title": "CEO",
+          "email": "emily@datastreamanalytics.com",
+          "linkedin": "linkedin.com/in/emilywatson-md",
+          "background": "Former Chief Medical Officer, Johns Hopkins, Harvard MBA"
+        },
+        {
+          "name": "James Park",
+          "title": "CTO",
+          "email": "james@datastreamanalytics.com",
+          "linkedin": "linkedin.com/in/jamespark-cto",
+          "background": "Ex-Google Health, MIT PhD in Computer Science"
+        }
+      ]
+    },
+    {
+      "company": "CloudScale Technologies",
+      "contacts": [
+        {
+          "name": "Alex Thompson",
+          "title": "Founder & CEO",
+          "email": "alex@cloudscaletech.io",
+          "linkedin": "linkedin.com/in/alexthompson-fintech",
+          "background": "Former Goldman Sachs VP, Berkeley Engineering"
+        },
+        {
+          "name": "Lisa Zhang",
+          "title": "VP of Product",
+          "email": "lisa@cloudscaletech.io",
+          "linkedin": "linkedin.com/in/lisazhang-product",
+          "background": "Ex-Square, specializes in financial infrastructure"
+        }
+      ]
+    },
+    {
+      "company": "InnovateRetail",
+      "contacts": [
+        {
+          "name": "Robert Kim",
+          "title": "CEO",
+          "email": "robert@innovateretail.com",
+          "linkedin": "linkedin.com/in/robertkim-retail",
+          "background": "Former VP at Target, Retail industry veteran"
+        },
+        {
+          "name": "Anna Petrov",
+          "title": "Chief Data Scientist",
+          "email": "anna@innovateretail.com",
+          "linkedin": "linkedin.com/in/annapetrov-ml",
+          "background": "Ex-Amazon ML team, PhD in Statistics from Stanford"
+        }
+      ]
+    }
+  ]
+}

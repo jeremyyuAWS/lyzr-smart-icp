@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "company_name": "TechFlow Solutions",
+      "domain": "techflowsolutions.com",
+      "source": "Exa AI Search",
+      "similarity_score": 0.92,
+      "description": "Enterprise workflow automation platform built on React and Node.js",
+      "founded": "2021",
+      "funding": "$15M Series A"
+    },
+    {
+      "company_name": "DataStream Analytics",
+      "domain": "datastreamanalytics.com",
+      "source": "Exa AI Search",
+      "similarity_score": 0.88,
+      "description": "Real-time data processing and visualization for healthcare organizations",
+      "founded": "2020",
+      "funding": "$8M Seed"
+    },
+    {
+      "company_name": "CloudScale Technologies",
+      "domain": "cloudscaletech.io",
+      "source": "Exa AI Search",
+      "similarity_score": 0.85,
+      "description": "Kubernetes-native platform for financial services infrastructure",
+      "founded": "2019",
+      "funding": "$25M Series B"
+    },
+    {
+      "company_name": "InnovateRetail",
+      "domain": "innovateretail.com",
+      "source": "Exa AI Search",
+      "similarity_score": 0.82,
+      "description": "AI-powered inventory management and customer analytics for retail chains",
+      "founded": "2022",
+      "funding": "$12M Series A"
+    }
+  ]
+}

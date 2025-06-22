@@ -1,0 +1,296 @@
+{
+  "technology_adoptions": [
+    {
+      "id": "tech-001",
+      "company": "TechFlow Solutions",
+      "company_domain": "techflowsolutions.com",
+      "detected_date": "2024-01-15",
+      "technology": "Kubernetes",
+      "adoption_stage": "implementation",
+      "confidence_score": 0.89,
+      "detection_sources": [
+        {
+          "source": "Job Postings",
+          "evidence": [
+            "DevOps Engineer - Kubernetes experience required",
+            "Senior Platform Engineer - K8s orchestration",
+            "Site Reliability Engineer - Container orchestration"
+          ],
+          "confidence": 0.95
+        },
+        {
+          "source": "GitHub Activity",
+          "evidence": [
+            "kubernetes-deployment repository created",
+            "helm-charts repository public",
+            "Container orchestration commits increased 300%"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "source": "Engineering Blog",
+          "evidence": [
+            "Blog post: 'Migrating to Kubernetes: Lessons Learned'",
+            "Technical documentation on K8s best practices"
+          ],
+          "confidence": 0.78
+        },
+        {
+          "source": "Tech Stack Analysis",
+          "evidence": [
+            "Docker usage patterns suggest K8s adoption",
+            "Microservices architecture indicators",
+            "Cloud-native tooling adoption"
+          ],
+          "confidence": 0.82
+        }
+      ],
+      "related_technologies": [
+        {
+          "technology": "Docker",
+          "relationship": "prerequisite",
+          "adoption_timeline": "6 months ago"
+        },
+        {
+          "technology": "Helm",
+          "relationship": "complementary",
+          "adoption_timeline": "2 months ago"
+        },
+        {
+          "technology": "Istio",
+          "relationship": "future",
+          "adoption_timeline": "planned"
+        }
+      ],
+      "business_impact": {
+        "reasons": [
+          "Scaling microservices architecture",
+          "Improved deployment automation",
+          "Better resource utilization",
+          "Enhanced reliability and uptime"
+        ],
+        "timeline": "3-6 months full adoption",
+        "investment_level": "significant"
+      },
+      "company_context": {
+        "employee_count": 156,
+        "engineering_team_size": 45,
+        "infrastructure_maturity": "intermediate",
+        "current_stack": ["React", "Node.js", "PostgreSQL", "AWS", "Docker"],
+        "recent_funding": "$15M Series A"
+      },
+      "signal_strength": 0.89,
+      "icp_match_score": 0.91,
+      "urgency": "medium",
+      "recommended_messaging": [
+        "Kubernetes cost optimization solutions",
+        "Container security and compliance",
+        "Multi-cloud orchestration strategies",
+        "DevOps automation tools"
+      ],
+      "auto_trigger_workflow": true
+    },
+    {
+      "id": "tech-002",
+      "company": "RetailTech Innovations",
+      "company_domain": "retailtechinnovations.com",
+      "detected_date": "2024-01-14",
+      "technology": "Machine Learning",
+      "adoption_stage": "exploration",
+      "confidence_score": 0.74,
+      "detection_sources": [
+        {
+          "source": "Job Postings",
+          "evidence": [
+            "Data Scientist - ML/AI focus",
+            "ML Engineer - Recommendation Systems",
+            "Senior Data Analyst - Predictive Modeling"
+          ],
+          "confidence": 0.88
+        },
+        {
+          "source": "Conference Attendance",
+          "evidence": [
+            "CTO spoke at ML in Retail conference",
+            "Team attended NeurIPS workshop",
+            "Participated in AI for Commerce summit"
+          ],
+          "confidence": 0.71
+        },
+        {
+          "source": "Technology Partnerships",
+          "evidence": [
+            "Partnership announced with ML platform vendor",
+            "Pilot program with AI analytics company"
+          ],
+          "confidence": 0.65
+        }
+      ],
+      "related_technologies": [
+        {
+          "technology": "Python",
+          "relationship": "prerequisite",
+          "adoption_timeline": "established"
+        },
+        {
+          "technology": "TensorFlow",
+          "relationship": "implementation",
+          "adoption_timeline": "2 months ago"
+        },
+        {
+          "technology": "Apache Spark",
+          "relationship": "complementary",
+          "adoption_timeline": "evaluation"
+        }
+      ],
+      "business_impact": {
+        "reasons": [
+          "Personalized customer recommendations",
+          "Inventory optimization",
+          "Dynamic pricing strategies",
+          "Customer churn prediction"
+        ],
+        "timeline": "6-12 months",
+        "investment_level": "moderate"
+      },
+      "company_context": {
+        "employee_count": 234,
+        "engineering_team_size": 28,
+        "data_maturity": "intermediate",
+        "current_stack": ["React", "Python", "PostgreSQL", "AWS", "Redis"],
+        "industry": "E-commerce/Retail"
+      },
+      "signal_strength": 0.74,
+      "icp_match_score": 0.68,
+      "urgency": "low",
+      "recommended_messaging": [
+        "ML model deployment and monitoring",
+        "Real-time recommendation engines",
+        "A/B testing frameworks for ML",
+        "Retail analytics platforms"
+      ],
+      "auto_trigger_workflow": false
+    },
+    {
+      "id": "tech-003",
+      "company": "FinanceFlow Systems",
+      "company_domain": "financeflowsystems.com",
+      "detected_date": "2024-01-13",
+      "technology": "Microservices",
+      "adoption_stage": "migration",
+      "confidence_score": 0.86,
+      "detection_sources": [
+        {
+          "source": "Architecture Blog Posts",
+          "evidence": [
+            "Microservices migration strategy blog series",
+            "API gateway implementation guide",
+            "Service mesh evaluation article"
+          ],
+          "confidence": 0.92
+        },
+        {
+          "source": "Job Postings",
+          "evidence": [
+            "Microservices Architect position",
+            "Backend Engineer - API development",
+            "Platform Engineer - Service mesh"
+          ],
+          "confidence": 0.87
+        },
+        {
+          "source": "GitHub Analysis",
+          "evidence": [
+            "Monolith decomposition commits",
+            "Multiple new service repositories",
+            "API gateway configuration files"
+          ],
+          "confidence": 0.81
+        }
+      ],
+      "related_technologies": [
+        {
+          "technology": "API Gateway",
+          "relationship": "implementation",
+          "adoption_timeline": "current"
+        },
+        {
+          "technology": "Service Mesh",
+          "relationship": "evaluation",
+          "adoption_timeline": "next quarter"
+        },
+        {
+          "technology": "Event Streaming",
+          "relationship": "future",
+          "adoption_timeline": "6-12 months"
+        }
+      ],
+      "business_impact": {
+        "reasons": [
+          "Breaking down monolithic architecture",
+          "Improved development team autonomy",
+          "Better scalability and resilience",
+          "Faster deployment cycles"
+        ],
+        "timeline": "12-18 months",
+        "investment_level": "high"
+      },
+      "company_context": {
+        "employee_count": 189,
+        "engineering_team_size": 52,
+        "architecture_maturity": "advanced",
+        "current_stack": ["Java", "Spring", "PostgreSQL", "AWS", "Docker"],
+        "industry": "Financial Services"
+      },
+      "signal_strength": 0.86,
+      "icp_match_score": 0.82,
+      "urgency": "medium",
+      "recommended_messaging": [
+        "Microservices monitoring and observability",
+        "API management and security",
+        "Service mesh solutions",
+        "Distributed system reliability"
+      ],
+      "auto_trigger_workflow": true
+    }
+  ],
+  "monitoring_criteria": {
+    "target_technologies": [
+      "Kubernetes",
+      "Docker",
+      "Microservices",
+      "Machine Learning",
+      "AI",
+      "React",
+      "Node.js",
+      "Python",
+      "GraphQL",
+      "Serverless",
+      "Event Streaming",
+      "Service Mesh"
+    ],
+    "adoption_stages": [
+      "exploration",
+      "evaluation", 
+      "pilot",
+      "implementation",
+      "migration",
+      "optimization"
+    ],
+    "detection_sources": [
+      "Job Postings",
+      "GitHub Activity", 
+      "Engineering Blogs",
+      "Conference Attendance",
+      "Technology Partnerships",
+      "Stack Overflow Activity",
+      "Documentation Sites"
+    ],
+    "confidence_threshold": 0.7,
+    "icp_match_threshold": 0.65,
+    "company_size_range": {
+      "min_employees": 25,
+      "max_employees": 2000
+    }
+  }
+}

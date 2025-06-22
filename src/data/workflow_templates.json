@@ -1,0 +1,250 @@
+{
+  "templates": [
+    {
+      "id": "standard-b2b",
+      "name": "Standard B2B Lead Generation",
+      "description": "Complete B2B lead generation with CRM sync",
+      "steps": [
+        {
+          "id": "icp-input",
+          "type": "agent",
+          "name": "ICP Definition",
+          "config": {
+            "required_fields": ["industries", "company_sizes", "technologies"]
+          }
+        },
+        {
+          "id": "exa-discovery",
+          "type": "agent",
+          "name": "Exa Company Discovery",
+          "config": {
+            "max_results": 50,
+            "confidence_threshold": 0.7,
+            "semantic_search": true
+          }
+        },
+        {
+          "id": "phind-enrichment",
+          "type": "enrichment",
+          "name": "Technical Signal Analysis",
+          "config": {
+            "include_hiring": true,
+            "include_tech_stack": true,
+            "include_funding": true
+          }
+        },
+        {
+          "id": "perplexity-contacts",
+          "type": "enrichment",
+          "name": "Contact Discovery",
+          "config": {
+            "max_contacts_per_company": 3,
+            "target_roles": ["CEO", "CTO", "VP Engineering", "VP Sales"]
+          }
+        },
+        {
+          "id": "ai-scoring",
+          "type": "scoring",
+          "name": "Lead Qualification",
+          "config": {
+            "scoring_weights": {
+              "icp_fit": 0.3,
+              "confidence": 0.3,
+              "signal_strength": 0.4
+            },
+            "min_threshold": 0.6
+          }
+        },
+        {
+          "id": "crm-sync",
+          "type": "crm",
+          "name": "CRM Integration",
+          "config": {
+            "provider": "hubspot",
+            "auto_sync": true,
+            "create_tasks": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "enterprise-sales",
+      "name": "Enterprise Sales Pipeline",
+      "description": "High-touch enterprise lead generation with scoring",
+      "steps": [
+        {
+          "id": "icp-input",
+          "type": "agent",
+          "name": "Enterprise ICP",
+          "config": {
+            "min_company_size": "Enterprise (1,000-4,999)",
+            "min_revenue": "$50M - $100M"
+          }
+        },
+        {
+          "id": "exa-discovery",
+          "type": "agent",
+          "name": "Enterprise Discovery",
+          "config": {
+            "max_results": 25,
+            "confidence_threshold": 0.8,
+            "focus_enterprise": true
+          }
+        },
+        {
+          "id": "comprehensive-enrichment",
+          "type": "enrichment",
+          "name": "Deep Company Research",
+          "config": {
+            "include_all_signals": true,
+            "financial_analysis": true,
+            "competitive_analysis": true
+          }
+        },
+        {
+          "id": "executive-contacts",
+          "type": "enrichment",
+          "name": "Executive Contact Discovery",
+          "config": {
+            "target_roles": ["CEO", "CFO", "CTO", "VP", "Director"],
+            "include_board_members": true
+          }
+        },
+        {
+          "id": "advanced-scoring",
+          "type": "scoring",
+          "name": "Enterprise Scoring",
+          "config": {
+            "enterprise_weights": {
+              "revenue_fit": 0.25,
+              "strategic_fit": 0.25,
+              "decision_maker_access": 0.25,
+              "timing_signals": 0.25
+            },
+            "min_threshold": 0.75
+          }
+        },
+        {
+          "id": "account-planning",
+          "type": "crm",
+          "name": "Account Planning",
+          "config": {
+            "create_account_plans": true,
+            "assign_account_exec": true,
+            "set_follow_up_cadence": "weekly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "startup-outreach",
+      "name": "Startup & SMB Outreach",
+      "description": "High-volume startup and SMB lead generation",
+      "steps": [
+        {
+          "id": "startup-icp",
+          "type": "agent",
+          "name": "Startup ICP",
+          "config": {
+            "company_stages": ["Seed Stage", "Series A", "Series B"],
+            "focus_growth": true
+          }
+        },
+        {
+          "id": "high-volume-discovery",
+          "type": "agent",
+          "name": "Volume Discovery",
+          "config": {
+            "max_results": 200,
+            "confidence_threshold": 0.6,
+            "speed_optimized": true
+          }
+        },
+        {
+          "id": "growth-signals",
+          "type": "enrichment",
+          "name": "Growth Signal Detection",
+          "config": {
+            "funding_alerts": true,
+            "hiring_velocity": true,
+            "product_launches": true
+          }
+        },
+        {
+          "id": "founder-contacts",
+          "type": "enrichment",
+          "name": "Founder & Leadership",
+          "config": {
+            "target_roles": ["Founder", "CEO", "CTO", "VP"],
+            "startup_focused": true
+          }
+        },
+        {
+          "id": "velocity-scoring",
+          "type": "scoring",
+          "name": "Velocity Scoring",
+          "config": {
+            "speed_optimized": true,
+            "growth_weighted": true,
+            "min_threshold": 0.5
+          }
+        },
+        {
+          "id": "automated-outreach",
+          "type": "email",
+          "name": "Automated Email Sequences",
+          "config": {
+            "sequence_length": 5,
+            "personalization_level": "medium",
+            "send_timing": "business_hours"
+          }
+        }
+      ]
+    }
+  ],
+  "integrations": {
+    "crm_providers": [
+      {
+        "id": "hubspot",
+        "name": "HubSpot",
+        "api_endpoint": "https://api.hubapi.com",
+        "auth_type": "api_key",
+        "features": ["contacts", "companies", "deals", "tasks", "notes"]
+      },
+      {
+        "id": "salesforce",
+        "name": "Salesforce",
+        "api_endpoint": "https://your-instance.salesforce.com",
+        "auth_type": "oauth",
+        "features": ["leads", "accounts", "opportunities", "tasks", "campaigns"]
+      },
+      {
+        "id": "pipedrive",
+        "name": "Pipedrive",
+        "api_endpoint": "https://api.pipedrive.com/v1",
+        "auth_type": "api_key",
+        "features": ["persons", "organizations", "deals", "activities", "notes"]
+      }
+    ],
+    "email_providers": [
+      {
+        "id": "outreach",
+        "name": "Outreach",
+        "api_endpoint": "https://api.outreach.io/api/v2",
+        "features": ["sequences", "prospects", "templates", "analytics"]
+      },
+      {
+        "id": "salesloft",
+        "name": "SalesLoft",
+        "api_endpoint": "https://api.salesloft.com/v2",
+        "features": ["cadences", "people", "emails", "calls"]
+      },
+      {
+        "id": "apollo",
+        "name": "Apollo",
+        "api_endpoint": "https://api.apollo.io/v1",
+        "features": ["sequences", "contacts", "emails", "tracking"]
+      }
+    ]
+  }
+}

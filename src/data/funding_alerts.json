@@ -1,0 +1,142 @@
+{
+  "funding_events": [
+    {
+      "id": "funding-001",
+      "company": "CloudScale Technologies",
+      "company_domain": "cloudscaletech.io",
+      "funding_round": "Series C",
+      "amount": 50000000,
+      "amount_formatted": "$50M",
+      "lead_investor": "Andreessen Horowitz",
+      "co_investors": ["Sequoia Capital", "General Catalyst"],
+      "valuation": 500000000,
+      "valuation_formatted": "$500M",
+      "announcement_date": "2024-01-15",
+      "source": "TechCrunch",
+      "source_url": "https://techcrunch.com/2024/01/15/cloudscale-series-c",
+      "use_of_funds": "Expand fintech infrastructure platform and enter European markets",
+      "industry": "Fintech",
+      "employee_count": 245,
+      "headquarters": "San Francisco, CA",
+      "founded_year": 2019,
+      "previous_funding": [
+        {
+          "round": "Series B",
+          "amount": 25000000,
+          "date": "2023-03-15",
+          "lead_investor": "General Catalyst"
+        },
+        {
+          "round": "Series A",
+          "amount": 12000000,
+          "date": "2022-01-20",
+          "lead_investor": "Sequoia Capital"
+        }
+      ],
+      "signal_strength": 0.95,
+      "icp_match_score": 0.89,
+      "urgency": "high",
+      "auto_trigger_workflow": true
+    },
+    {
+      "id": "funding-002",
+      "company": "HealthTech Innovations",
+      "company_domain": "healthtechinnovations.com",
+      "funding_round": "Series A",
+      "amount": 18000000,
+      "amount_formatted": "$18M",
+      "lead_investor": "GV (Google Ventures)",
+      "co_investors": ["Bessemer Venture Partners", "Founders Fund"],
+      "valuation": 90000000,
+      "valuation_formatted": "$90M",
+      "announcement_date": "2024-01-14",
+      "source": "VentureBeat",
+      "source_url": "https://venturebeat.com/2024/01/14/healthtech-series-a",
+      "use_of_funds": "Accelerate AI-powered diagnostics platform development",
+      "industry": "Healthcare Technology",
+      "employee_count": 78,
+      "headquarters": "Boston, MA",
+      "founded_year": 2021,
+      "previous_funding": [
+        {
+          "round": "Seed",
+          "amount": 5500000,
+          "date": "2022-09-10",
+          "lead_investor": "Bessemer Venture Partners"
+        }
+      ],
+      "signal_strength": 0.87,
+      "icp_match_score": 0.72,
+      "urgency": "medium",
+      "auto_trigger_workflow": true
+    },
+    {
+      "id": "funding-003",
+      "company": "EduFlow Systems",
+      "company_domain": "eduflowsystems.com",
+      "funding_round": "Series B",
+      "amount": 35000000,
+      "amount_formatted": "$35M",
+      "lead_investor": "Accel Partners",
+      "co_investors": ["Lightspeed Venture Partners", "Owl Ventures"],
+      "valuation": 280000000,
+      "valuation_formatted": "$280M",
+      "announcement_date": "2024-01-13",
+      "source": "EdSurge",
+      "source_url": "https://edsurge.com/2024/01/13/eduflow-series-b",
+      "use_of_funds": "Scale personalized learning platform and expand internationally",
+      "industry": "Education Technology",
+      "employee_count": 156,
+      "headquarters": "Austin, TX",
+      "founded_year": 2020,
+      "previous_funding": [
+        {
+          "round": "Series A",
+          "amount": 15000000,
+          "date": "2023-05-22",
+          "lead_investor": "Lightspeed Venture Partners"
+        },
+        {
+          "round": "Seed",
+          "amount": 7000000,
+          "date": "2022-02-15",
+          "lead_investor": "Owl Ventures"
+        }
+      ],
+      "signal_strength": 0.82,
+      "icp_match_score": 0.68,
+      "urgency": "medium",
+      "auto_trigger_workflow": false
+    }
+  ],
+  "monitoring_criteria": {
+    "min_funding_amount": 5000000,
+    "target_industries": [
+      "Technology",
+      "SaaS",
+      "Fintech",
+      "Healthcare Technology",
+      "AI/Machine Learning",
+      "Cybersecurity",
+      "E-commerce"
+    ],
+    "funding_rounds": [
+      "Seed",
+      "Series A",
+      "Series B",
+      "Series C",
+      "Series D+"
+    ],
+    "geographic_focus": [
+      "North America",
+      "Europe",
+      "APAC"
+    ],
+    "employee_count_range": {
+      "min": 10,
+      "max": 5000
+    },
+    "icp_match_threshold": 0.6,
+    "signal_strength_threshold": 0.75
+  }
+}

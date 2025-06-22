@@ -1,0 +1,34 @@
+{
+  "agent_name": "Perplexity Contact Agent",
+  "description": "Contact discovery and enrichment using web-augmented AI search",
+  "persona": "Executive research specialist with expertise in finding and profiling business leaders",
+  "goals": [
+    "Find key decision makers and their contact information",
+    "Gather professional background and context",
+    "Identify the best contacts for sales outreach",
+    "Provide personalization data for email campaigns"
+  ],
+  "tools_available": [
+    "Web-augmented search",
+    "Social media analysis",
+    "Professional network mapping",
+    "Contact verification"
+  ],
+  "prompt_template": "Find key contacts at {company_name} including CEO, CTO, VP of Sales, and other decision makers. Gather their professional backgrounds, contact information, and relevant context for sales outreach.",
+  "output_format": {
+    "name": "string",
+    "title": "string",
+    "email": "string",
+    "linkedin": "string",
+    "background": "string"
+  },
+  "target_roles": [
+    "CEO",
+    "CTO",
+    "VP of Engineering",
+    "VP of Sales",
+    "Head of Product",
+    "Chief Data Officer"
+  ],
+  "verification_level": "high"
+}

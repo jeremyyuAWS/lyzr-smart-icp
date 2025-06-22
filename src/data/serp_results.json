@@ -1,0 +1,80 @@
+{
+  "serp_data": [
+    {
+      "company": "TechFlow Solutions",
+      "top_urls": [
+        "https://techflowsolutions.com/about",
+        "https://techflowsolutions.com/careers",
+        "https://techcrunch.com/2024/techflow-15m-series-a",
+        "https://linkedin.com/company/techflow-solutions"
+      ],
+      "news_mentions": [
+        "TechFlow Solutions raises $15M Series A for workflow automation",
+        "Startup spotlight: How TechFlow is transforming enterprise operations",
+        "TechFlow announces partnership with Salesforce"
+      ],
+      "social_signals": {
+        "linkedin_followers": "2.5K",
+        "twitter_followers": "1.8K",
+        "glassdoor_rating": "4.3/5"
+      }
+    },
+    {
+      "company": "DataStream Analytics",
+      "top_urls": [
+        "https://datastreamanalytics.com/platform",
+        "https://datastreamanalytics.com/team",
+        "https://venturebeat.com/datastream-healthcare-analytics",
+        "https://linkedin.com/company/datastream-analytics"
+      ],
+      "news_mentions": [
+        "DataStream Analytics secures $8M seed funding for healthcare AI",
+        "Healthcare data platform achieves HIPAA compliance milestone",
+        "DataStream expands into telehealth analytics market"
+      ],
+      "social_signals": {
+        "linkedin_followers": "1.9K",
+        "twitter_followers": "1.2K",
+        "glassdoor_rating": "4.1/5"
+      }
+    },
+    {
+      "company": "CloudScale Technologies",
+      "top_urls": [
+        "https://cloudscaletech.io/platform",
+        "https://cloudscaletech.io/security",
+        "https://fintech-news.com/cloudscale-series-b-funding",
+        "https://linkedin.com/company/cloudscale-tech"
+      ],
+      "news_mentions": [
+        "CloudScale Technologies closes $25M Series B for fintech infrastructure",
+        "Banking on the cloud: How CloudScale is revolutionizing financial services",
+        "CloudScale achieves SOC 2 Type II compliance"
+      ],
+      "social_signals": {
+        "linkedin_followers": "3.2K",
+        "twitter_followers": "2.4K",
+        "glassdoor_rating": "4.5/5"
+      }
+    },
+    {
+      "company": "InnovateRetail",
+      "top_urls": [
+        "https://innovateretail.com/solutions",
+        "https://innovateretail.com/customers",
+        "https://retail-tech-news.com/innovateretail-ai-breakthrough",
+        "https://linkedin.com/company/innovate-retail"
+      ],
+      "news_mentions": [
+        "InnovateRetail's AI improves inventory accuracy by 25%",
+        "Retail tech startup raises $12M Series A",
+        "Major retailers adopt InnovateRetail's analytics platform"
+      ],
+      "social_signals": {
+        "linkedin_followers": "1.6K",
+        "twitter_followers": "980",
+        "glassdoor_rating": "4.2/5"
+      }
+    }
+  ]
+}
