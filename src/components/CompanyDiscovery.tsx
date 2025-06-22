@@ -9,7 +9,11 @@ import phindSignals from '../data/phind_signals.json';
 import perplexityContacts from '../data/perplexity_contacts.json';
 import serpResults from '../data/serp_results.json';
 
-export function CompanyDiscovery() {
+interface CompanyDiscoveryProps {
+  onNavigateToTab?: (tabId: string) => void;
+}
+
+export function CompanyDiscovery({ onNavigateToTab }: CompanyDiscoveryProps) {
   const [isSearching, setIsSearching] = useState(false);
   const [searchComplete, setSearchComplete] = useState(false);
   const [companies, setCompanies] = useState<any[]>([]);
@@ -371,6 +375,7 @@ export function CompanyDiscovery() {
           isOpen={!!selectedLead}
           onClose={() => setSelectedLead(null)}
           leadData={selectedLead}
+          onNavigateToTab={onNavigateToTab}
         />
       )}
     </div>

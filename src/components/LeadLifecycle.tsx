@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Clock, Users, TrendingUp, CheckCircle, AlertCircle, Calendar, Mail, Phone, MessageSquare } from 'lucide-react';
 import { InfoModal } from './InfoModal';
 
@@ -15,7 +15,11 @@ interface Lead {
   crmId?: string;
 }
 
-export function LeadLifecycle() {
+interface LeadLifecycleProps {
+  onNavigateToTab?: (tabId: string) => void;
+}
+
+export function LeadLifecycle({ onNavigateToTab }: LeadLifecycleProps) {
   const [leads, setLeads] = useState<Lead[]>([
     {
       id: '1',
@@ -69,6 +73,52 @@ export function LeadLifecycle() {
   const [selectedStage, setSelectedStage] = useState<string>('all');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 
+  // Check for new leads from other components
+  useEffect(() => {
+    const checkForNewLeads = () => {
+      const selectedLeadData = localStorage.getItem('selectedLeadForCRM');
+      if (selectedLeadData) {
+        try {
+          const leadData = JSON.parse(selectedLeadData);
+          
+          // Create a new lead from the selected data
+          const newLead: Lead = {
+            id: `lead-${Date.now()}`,
+            company: leadData.company,
+            contact: leadData.contacts?.[0]?.name || 'Contact TBD',
+            email: leadData.contacts?.[0]?.email || 'email@company.com',
+            score: leadData.overall_score || leadData.similarity_score || 0.8,
+            stage: 'new',
+            lastActivity: new Date().toLocaleString(),
+            nextAction: 'Initial outreach and qualification',
+            source: 'Lead Profile Action',
+            crmId: `CRM-${Date.now()}`
+          };
+
+          // Add the lead if it doesn't already exist
+          setLeads(prev => {
+            const existingLead = prev.find(l => l.company === newLead.company);
+            if (!existingLead) {
+              return [newLead, ...prev];
+            }
+            return prev;
+          });
+
+          // Clear the localStorage
+          localStorage.removeItem('selectedLeadForCRM');
+        } catch (error) {
+          console.error('Error parsing lead data:', error);
+        }
+      }
+    };
+
+    // Check on component mount and periodically
+    checkForNewLeads();
+    const interval = setInterval(checkForNewLeads, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   const stages = [
     { id: 'all', name: 'All Leads', color: 'slate' },
     { id: 'new', name: 'New', color: 'blue' },
@@ -113,9 +163,9 @@ export function LeadLifecycle() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <TrendingUp className="h-6 w-6 text-blue-600" />
-          <h2 className="text-2xl font-bold text-slate-900">Lead Lifecycle Management</h2>
+          <h2 className="text-2xl font-bold text-slate-900">Lead Pipeline Management</h2>
           <InfoModal
-            title="Lead Lifecycle Management"
+            title="Lead Pipeline Management"
             description="Track leads through the entire sales pipeline from discovery to close with automated stage progression and CRM sync."
             features={[
               "Visual pipeline with drag-and-drop stage management",
@@ -244,7 +294,22 @@ export function LeadLifecycle() {
               </div>
               
               <div className="flex items-center gap-2">
-                <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
+                <button 
+                  onClick={() => {
+                    // Store lead data for email generation
+                    localStorage.setItem('selectedLeadForEmail', JSON.stringify({
+                      company: lead.company,
+                      contact: lead.contact,
+                      email: lead.email,
+                      score: lead.score
+                    }));
+                    if (onNavigateToTab) {
+                      onNavigateToTab('emails');
+                    }
+                  }}
+                  className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+                  title="Generate Email"
+                >
                   <Mail className="h-4 w-4" />
                 </button>
                 <button className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded transition-colors">
@@ -313,15 +378,8 @@ export function LeadLifecycle() {
                   <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
                     <Clock className="h-4 w-4 text-slate-400" />
                     <div>
-                      <p className="text-sm text-slate-900">Lead discovered via AI workflow</p>
-                      <p className="text-xs text-slate-500">2024-01-15 9:00 AM</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
-                    <Mail className="h-4 w-4 text-slate-400" />
-                    <div>
-                      <p className="text-sm text-slate-900">Initial outreach email sent</p>
-                      <p className="text-xs text-slate-500">2024-01-15 10:30 AM</p>
+                      <p className="text-sm text-slate-900">Lead added to pipeline</p>
+                      <p className="text-xs text-slate-500">{selectedLead.lastActivity}</p>
                     </div>
                   </div>
                 </div>

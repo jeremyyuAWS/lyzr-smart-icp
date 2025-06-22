@@ -24,6 +24,11 @@ import { PredictiveAnalytics } from './components/PredictiveAnalytics';
 
 function App() {
   const [isAdminView, setIsAdminView] = useState(false);
+  const [activeTab, setActiveTab] = useState('icp-builder');
+
+  const switchToTab = (tabId: string) => {
+    setActiveTab(tabId);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -67,7 +72,7 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
-        <Tabs defaultValue="icp-builder" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-18 lg:w-auto lg:inline-flex mb-8">
             <TabsTrigger value="icp-builder">ICP Builder</TabsTrigger>
             <TabsTrigger value="discovery">Discovery</TabsTrigger>
@@ -95,15 +100,15 @@ function App() {
           </TabsContent>
 
           <TabsContent value="discovery" className="space-y-6">
-            <CompanyDiscovery />
+            <CompanyDiscovery onNavigateToTab={switchToTab} />
           </TabsContent>
 
           <TabsContent value="scoring" className="space-y-6">
-            <LeadScoring />
+            <LeadScoring onNavigateToTab={switchToTab} />
           </TabsContent>
 
           <TabsContent value="lifecycle" className="space-y-6">
-            <LeadLifecycle />
+            <LeadLifecycle onNavigateToTab={switchToTab} />
           </TabsContent>
 
           <TabsContent value="emails" className="space-y-6">

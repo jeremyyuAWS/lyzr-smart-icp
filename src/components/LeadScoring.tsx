@@ -8,7 +8,11 @@ import perplexityContacts from '../data/perplexity_contacts.json';
 import phindSignals from '../data/phind_signals.json';
 import serpResults from '../data/serp_results.json';
 
-export function LeadScoring() {
+interface LeadScoringProps {
+  onNavigateToTab?: (tabId: string) => void;
+}
+
+export function LeadScoring({ onNavigateToTab }: LeadScoringProps) {
   const [selectedLead, setSelectedLead] = useState<any>(null);
 
   const getContactsForCompany = (companyName: string) => {
@@ -200,6 +204,7 @@ export function LeadScoring() {
           isOpen={!!selectedLead}
           onClose={() => setSelectedLead(null)}
           leadData={selectedLead}
+          onNavigateToTab={onNavigateToTab}
         />
       )}
     </div>

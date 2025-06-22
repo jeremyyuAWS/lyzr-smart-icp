@@ -55,10 +55,73 @@ interface LeadProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
   leadData: LeadProfileData;
+  onNavigateToTab?: (tabId: string) => void;
 }
 
-export function LeadProfileModal({ isOpen, onClose, leadData }: LeadProfileModalProps) {
+export function LeadProfileModal({ isOpen, onClose, leadData, onNavigateToTab }: LeadProfileModalProps) {
   if (!isOpen) return null;
+
+  const handleGenerateEmail = () => {
+    // Store lead data for email generation (you could use context or local storage)
+    localStorage.setItem('selectedLeadForEmail', JSON.stringify(leadData));
+    
+    // Navigate to emails tab
+    if (onNavigateToTab) {
+      onNavigateToTab('emails');
+    }
+    
+    // Close modal
+    onClose();
+    
+    // Show success message
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded z-50';
+    notification.innerHTML = `
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <span>Lead data prepared for email generation</span>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 3000);
+  };
+
+  const handleAddToCRM = () => {
+    // Store lead data for CRM sync
+    localStorage.setItem('selectedLeadForCRM', JSON.stringify(leadData));
+    
+    // Navigate to pipeline/lifecycle tab
+    if (onNavigateToTab) {
+      onNavigateToTab('lifecycle');
+    }
+    
+    // Close modal
+    onClose();
+    
+    // Show success message
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded z-50';
+    notification.innerHTML = `
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <span>Lead added to pipeline</span>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 3000);
+  };
 
   const getSourceIcon = (source: string) => {
     if (source.includes('linkedin')) return <Linkedin className="h-3 w-3" />;
@@ -448,16 +511,26 @@ export function LeadProfileModal({ isOpen, onClose, leadData }: LeadProfileModal
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6">
                 <h3 className="font-semibold text-slate-900 mb-4">Quick Actions</h3>
                 <div className="space-y-3">
-                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                  <button 
+                    onClick={handleGenerateEmail}
+                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Mail className="h-4 w-4" />
                     Generate Email
                   </button>
-                  <button className="w-full px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
-                    Add to CRM
+                  <button 
+                    onClick={handleAddToCRM}
+                    className="w-full px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Users className="h-4 w-4" />
+                    Add to Pipeline
                   </button>
-                  <button className="w-full px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                  <button className="w-full px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors flex items-center justify-center gap-2">
+                    <Calendar className="h-4 w-4" />
                     Schedule Follow-up
                   </button>
-                  <button className="w-full px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors">
+                  <button className="w-full px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors flex items-center justify-center gap-2">
+                    <ExternalLink className="h-4 w-4" />
                     Export Data
                   </button>
                 </div>
