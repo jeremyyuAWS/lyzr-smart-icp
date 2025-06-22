@@ -67,20 +67,20 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
-        <Tabs defaultValue="analytics" className="w-full">
+        <Tabs defaultValue="icp-builder" className="w-full">
           <TabsList className="grid w-full grid-cols-18 lg:w-auto lg:inline-flex mb-8">
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
-            <TabsTrigger value="alerts">Alerts</TabsTrigger>
-            <TabsTrigger value="triggers">Triggers</TabsTrigger>
-            <TabsTrigger value="predictive">Predictive</TabsTrigger>
-            <TabsTrigger value="competitive">Competitive</TabsTrigger>
             <TabsTrigger value="icp-builder">ICP Builder</TabsTrigger>
-            <TabsTrigger value="workflow">Workflow</TabsTrigger>
             <TabsTrigger value="discovery">Discovery</TabsTrigger>
             <TabsTrigger value="scoring">Scoring</TabsTrigger>
             <TabsTrigger value="lifecycle">Pipeline</TabsTrigger>
             <TabsTrigger value="emails">Emails</TabsTrigger>
             <TabsTrigger value="orchestration">Orchestration</TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="alerts">Alerts</TabsTrigger>
+            <TabsTrigger value="triggers">Triggers</TabsTrigger>
+            <TabsTrigger value="predictive">Predictive</TabsTrigger>
+            <TabsTrigger value="competitive">Competitive</TabsTrigger>
+            <TabsTrigger value="workflow">Workflow</TabsTrigger>
             <TabsTrigger value="integrations">Integrations</TabsTrigger>
             <TabsTrigger value="upload">Upload</TabsTrigger>
             <TabsTrigger value="crm">CRM Sync</TabsTrigger>
@@ -89,6 +89,30 @@ function App() {
             {isAdminView && <TabsTrigger value="admin">Admin</TabsTrigger>}
             {isAdminView && <TabsTrigger value="debug">Debug</TabsTrigger>}
           </TabsList>
+
+          <TabsContent value="icp-builder" className="space-y-6">
+            <ICPBuilder />
+          </TabsContent>
+
+          <TabsContent value="discovery" className="space-y-6">
+            <CompanyDiscovery />
+          </TabsContent>
+
+          <TabsContent value="scoring" className="space-y-6">
+            <LeadScoring />
+          </TabsContent>
+
+          <TabsContent value="lifecycle" className="space-y-6">
+            <LeadLifecycle />
+          </TabsContent>
+
+          <TabsContent value="emails" className="space-y-6">
+            <EmailGenerator />
+          </TabsContent>
+
+          <TabsContent value="orchestration" className="space-y-6">
+            <EmailOrchestration />
+          </TabsContent>
 
           <TabsContent value="analytics" className="space-y-6">
             <AnalyticsDashboard />
@@ -110,32 +134,8 @@ function App() {
             <CompetitiveIntelligence />
           </TabsContent>
 
-          <TabsContent value="icp-builder" className="space-y-6">
-            <ICPBuilder />
-          </TabsContent>
-
           <TabsContent value="workflow" className="space-y-6">
             <WorkflowBuilder />
-          </TabsContent>
-
-          <TabsContent value="discovery" className="space-y-6">
-            <CompanyDiscovery />
-          </TabsContent>
-
-          <TabsContent value="scoring" className="space-y-6">
-            <LeadScoring />
-          </TabsContent>
-
-          <TabsContent value="lifecycle" className="space-y-6">
-            <LeadLifecycle />
-          </TabsContent>
-
-          <TabsContent value="emails" className="space-y-6">
-            <EmailGenerator />
-          </TabsContent>
-
-          <TabsContent value="orchestration" className="space-y-6">
-            <EmailOrchestration />
           </TabsContent>
 
           <TabsContent value="integrations" className="space-y-6">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Building2, Users, Code, MapPin, Target, Save, DollarSign, TrendingUp, AlertCircle, Clock, MessageSquare, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+import { Building2, Users, Code, MapPin, Target, Save, DollarSign, TrendingUp, AlertCircle, Clock, MessageSquare, Sparkles, ChevronDown, ChevronUp, Send, User, Bot } from 'lucide-react';
 import { InfoModal } from './InfoModal';
 import icpCriteria from '../data/icp_criteria.json';
 
@@ -19,7 +19,7 @@ interface ICPCriteria {
 
 export function ICPBuilder() {
   const [chatInput, setChatInput] = useState('');
-  const [chatHistory, setChatHistory] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
+  const [chatHistory, setChatHistory] = useState<Array<{role: 'user' | 'assistant', content: string, timestamp: number}>>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   
@@ -37,19 +37,32 @@ export function ICPBuilder() {
   const [selectedUrgencyIndicators, setSelectedUrgencyIndicators] = useState<string[]>([]);
   const [description, setDescription] = useState('');
 
-  // Example prompts to help users get started
+  // Example prompts spanning different industries
   const examplePrompts = [
-    "B2B SaaS companies with 50-200 employees using AWS and actively hiring engineers in North America",
-    "Healthcare startups in Series A stage with AI/ML focus and decision makers in product roles",
-    "Enterprise retail companies over $100M revenue using e-commerce platforms and facing digital transformation challenges",
-    "Financial services firms in growth stage with cloud infrastructure and seeking cost reduction solutions"
+    "Mid-size manufacturing companies implementing digital transformation initiatives in the Midwest",
+    "Healthcare organizations with 200-500 employees adopting new patient management systems",
+    "Financial services firms facing regulatory compliance challenges and seeking automation solutions",
+    "Retail chains expanding their e-commerce capabilities and customer analytics",
+    "Professional services companies transitioning to remote work and digital collaboration tools",
+    "Construction companies investing in project management software and IoT solutions"
   ];
+
+  const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
+
+  // Auto-rotate example prompts every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentExampleIndex((prev) => (prev + 1) % examplePrompts.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleChatSubmit = async () => {
     if (!chatInput.trim()) return;
 
     const userMessage = chatInput.trim();
-    setChatHistory(prev => [...prev, { role: 'user', content: userMessage }]);
+    const timestamp = Date.now();
+    setChatHistory(prev => [...prev, { role: 'user', content: userMessage, timestamp }]);
     setChatInput('');
     setIsProcessing(true);
 
@@ -64,7 +77,7 @@ export function ICPBuilder() {
 
     // Generate AI response
     const aiResponse = generateAIResponse(parsedCriteria);
-    setChatHistory(prev => [...prev, { role: 'assistant', content: aiResponse }]);
+    setChatHistory(prev => [...prev, { role: 'assistant', content: aiResponse, timestamp: Date.now() }]);
     
     setIsProcessing(false);
     setDescription(userMessage);
@@ -74,50 +87,57 @@ export function ICPBuilder() {
     const parsed: any = {};
     const lowerText = text.toLowerCase();
 
-    // Industry parsing
+    // Industry parsing - more comprehensive
     const industries = icpCriteria.industries.filter(industry => 
       lowerText.includes(industry.toLowerCase()) || 
-      lowerText.includes(industry.split(' ')[0].toLowerCase())
+      lowerText.includes(industry.split(' ')[0].toLowerCase()) ||
+      (industry.includes('Technology') && (lowerText.includes('tech') || lowerText.includes('software'))) ||
+      (industry.includes('Healthcare') && (lowerText.includes('health') || lowerText.includes('medical'))) ||
+      (industry.includes('Financial') && (lowerText.includes('finance') || lowerText.includes('banking'))) ||
+      (industry.includes('Manufacturing') && lowerText.includes('manufacturing')) ||
+      (industry.includes('Retail') && (lowerText.includes('retail') || lowerText.includes('e-commerce')))
     );
     if (industries.length > 0) parsed.industries = industries;
 
     // Technology parsing
     const technologies = icpCriteria.technologies.filter(tech => 
       lowerText.includes(tech.toLowerCase().split(' ')[0]) ||
-      lowerText.includes(tech.toLowerCase())
+      lowerText.includes(tech.toLowerCase()) ||
+      (tech.includes('Digital') && lowerText.includes('digital')) ||
+      (tech.includes('Cloud') && lowerText.includes('cloud'))
     );
     if (technologies.length > 0) parsed.technologies = technologies;
 
     // Location parsing
     const locations = icpCriteria.locations.filter(location => 
-      lowerText.includes(location.toLowerCase())
+      lowerText.includes(location.toLowerCase()) ||
+      (location.includes('Midwest') && lowerText.includes('midwest'))
     );
     if (locations.length > 0) parsed.locations = locations;
 
-    // Size parsing
+    // Size parsing - more nuanced
     if (lowerText.includes('startup') || lowerText.includes('early stage')) {
       parsed.company_sizes = ['Startup (Bootstrapped)', 'Seed Stage'];
     }
     if (lowerText.includes('enterprise') || lowerText.includes('large')) {
       parsed.company_sizes = ['Large Enterprise (5,000-19,999)', 'Fortune 500 (20,000+)'];
     }
-    if (lowerText.includes('medium') || lowerText.includes('mid-size')) {
+    if (lowerText.includes('mid-size') || lowerText.includes('medium') || (lowerText.includes('200') && lowerText.includes('500'))) {
       parsed.company_sizes = ['Medium Business (50-249)', 'Large Business (250-999)'];
     }
-
-    // Growth stage parsing
-    const stages = icpCriteria.growth_stages.filter(stage => 
-      lowerText.includes(stage.toLowerCase())
-    );
-    if (stages.length > 0) parsed.growth_stages = stages;
-
-    // Business model parsing
-    if (lowerText.includes('b2b') || lowerText.includes('business to business')) {
-      parsed.business_models = ['B2B (Business to Business)'];
+    if (lowerText.includes('small business') || lowerText.includes('smb')) {
+      parsed.company_sizes = ['Small Business (10-49)'];
     }
-    if (lowerText.includes('saas') || lowerText.includes('software as a service')) {
-      parsed.business_models = [...(parsed.business_models || []), 'SaaS (Software as a Service)'];
-    }
+
+    // Pain points parsing
+    const painPoints = icpCriteria.pain_points.filter(pain => {
+      const painLower = pain.toLowerCase();
+      return lowerText.includes(painLower) ||
+        (painLower.includes('digital transformation') && lowerText.includes('digital')) ||
+        (painLower.includes('compliance') && lowerText.includes('compliance')) ||
+        (painLower.includes('remote work') && lowerText.includes('remote'))
+    });
+    if (painPoints.length > 0) parsed.pain_points = painPoints;
 
     return parsed;
   };
@@ -129,6 +149,7 @@ export function ICPBuilder() {
     if (parsed.company_sizes) setSelectedSizes(parsed.company_sizes);
     if (parsed.growth_stages) setSelectedStages(parsed.growth_stages);
     if (parsed.business_models) setSelectedModels(parsed.business_models);
+    if (parsed.pain_points) setSelectedPainPoints(parsed.pain_points);
   };
 
   const generateAIResponse = (parsed: any): string => {
@@ -137,8 +158,13 @@ export function ICPBuilder() {
     if (parsed.technologies) matchedCriteria.push(`${parsed.technologies.length} technology matches`);
     if (parsed.locations) matchedCriteria.push(`location targeting set`);
     if (parsed.company_sizes) matchedCriteria.push(`company size criteria applied`);
+    if (parsed.pain_points) matchedCriteria.push(`pain points identified`);
 
-    return `Great! I've analyzed your ideal customer description and identified ${matchedCriteria.join(', ')}. I've automatically populated the relevant filters below. You can refine these selections or add additional criteria using the advanced filters. Would you like me to suggest any additional targeting criteria based on your description?`;
+    if (matchedCriteria.length === 0) {
+      return "I've analyzed your description and I'm ready to help you build your Ideal Customer Profile. I can help identify specific industries, company sizes, technologies, and other criteria that match your target market. Feel free to use the advanced filters below to refine your targeting further.";
+    }
+
+    return `Perfect! I've analyzed your ideal customer description and identified ${matchedCriteria.join(', ')}. I've automatically populated the relevant filters below. You can refine these selections or add additional criteria using the advanced filters. Would you like me to suggest any additional targeting criteria based on your description?`;
   };
 
   const handleMultiSelect = (
@@ -174,6 +200,10 @@ export function ICPBuilder() {
     alert('ICP criteria saved successfully!');
   };
 
+  const useExamplePrompt = (prompt: string) => {
+    setChatInput(prompt);
+  };
+
   const totalCriteria = selectedIndustries.length + selectedSizes.length + selectedRevenue.length + 
     selectedModels.length + selectedStages.length + selectedTechnologies.length + 
     selectedLocations.length + selectedDecisionMakers.length + selectedPainPoints.length + 
@@ -186,16 +216,16 @@ export function ICPBuilder() {
           <Target className="h-6 w-6 text-blue-600" />
           <h2 className="text-2xl font-bold text-slate-900">Define Your Ideal Customer Profile</h2>
           <InfoModal
-            title="Chat-First ICP Builder"
-            description="Describe your ideal customer in natural language, then refine with advanced filters. AI automatically extracts and applies relevant criteria from your description."
+            title="AI-Powered ICP Builder"
+            description="Describe your ideal customer in natural language and let AI automatically extract and apply relevant targeting criteria across industries."
             features={[
               "Natural language processing for intuitive customer description",
               "Automatic filter population based on conversational input",
-              "Advanced filtering with 11+ dimensions across all industries",
-              "Real-time ICP scoring and criteria validation",
+              "11+ targeting dimensions across all industries and markets",
+              "Real-time ICP validation and criteria refinement",
               "Export-ready profiles for use across sales and marketing tools"
             ]}
-            businessValue="Chat-first approach reduces ICP definition time by 60% while increasing accuracy through natural language understanding and guided refinement."
+            businessValue="AI-powered ICP building reduces profile creation time by 60% while increasing targeting accuracy through natural language understanding."
           />
         </div>
         <button
@@ -208,76 +238,147 @@ export function ICPBuilder() {
         </button>
       </div>
 
-      {/* Chat Interface */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-        <div className="flex items-center gap-3 mb-4">
-          <MessageSquare className="h-5 w-5 text-blue-600" />
-          <h3 className="font-semibold text-slate-900">Describe Your Ideal Customer</h3>
+      {/* Main Chat Interface */}
+      <div className="bg-white border border-slate-200 rounded-xl shadow-sm">
+        {/* Chat Header */}
+        <div className="p-6 border-b border-slate-100">
+          <div className="flex items-center gap-3 mb-2">
+            <MessageSquare className="h-5 w-5 text-blue-600" />
+            <h3 className="font-semibold text-slate-900">Describe Your Ideal Customer</h3>
+          </div>
+          <p className="text-slate-600 text-sm">
+            Tell me about the types of companies you want to target. I'll help you build a comprehensive customer profile.
+          </p>
         </div>
 
-        {/* Chat History */}
-        {chatHistory.length > 0 && (
-          <div className="space-y-4 mb-6 max-h-64 overflow-y-auto">
-            {chatHistory.map((message, index) => (
-              <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-3xl p-4 rounded-lg ${
-                  message.role === 'user' 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-slate-100 text-slate-900'
-                }`}>
-                  <p className="text-sm">{message.content}</p>
+        {/* Chat Messages */}
+        <div className="max-h-96 overflow-y-auto">
+          {chatHistory.length === 0 ? (
+            <div className="p-6">
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Bot className="h-8 w-8 text-blue-600" />
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+                <h4 className="font-medium text-slate-900 mb-2">Let's build your Ideal Customer Profile</h4>
+                <p className="text-slate-600 text-sm mb-6">
+                  Describe your target customers in your own words. I'll identify the key criteria and help you refine your targeting.
+                </p>
 
-        {/* Example Prompts */}
-        {chatHistory.length === 0 && (
-          <div className="mb-6">
-            <p className="text-sm text-slate-600 mb-3">Try one of these examples:</p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-              {examplePrompts.map((prompt, index) => (
-                <button
-                  key={index}
-                  onClick={() => setChatInput(prompt)}
-                  className="p-3 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm text-slate-700 transition-colors"
-                >
-                  "{prompt}"
-                </button>
-              ))}
+                {/* Auto-rotating Example */}
+                <div className="bg-slate-50 rounded-lg p-4 mb-4">
+                  <p className="text-xs text-slate-500 mb-2">Example:</p>
+                  <button
+                    onClick={() => useExamplePrompt(examplePrompts[currentExampleIndex])}
+                    className="text-left w-full p-3 bg-white border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-all text-sm text-slate-700 italic"
+                  >
+                    "{examplePrompts[currentExampleIndex]}"
+                  </button>
+                  <div className="flex justify-center mt-3 gap-1">
+                    {examplePrompts.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                          index === currentExampleIndex ? 'bg-blue-600' : 'bg-slate-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* More Examples Button */}
+                <details className="text-left">
+                  <summary className="text-xs text-blue-600 hover:text-blue-700 cursor-pointer mb-3">
+                    Show more examples
+                  </summary>
+                  <div className="grid gap-2">
+                    {examplePrompts.filter((_, i) => i !== currentExampleIndex).map((prompt, index) => (
+                      <button
+                        key={index}
+                        onClick={() => useExamplePrompt(prompt)}
+                        className="text-left p-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-lg text-xs text-slate-600 italic transition-colors"
+                      >
+                        "{prompt}"
+                      </button>
+                    ))}
+                  </div>
+                </details>
+              </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="p-6 space-y-4">
+              {chatHistory.map((message, index) => (
+                <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-3xl p-4 rounded-lg ${
+                    message.role === 'user' 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-slate-100 text-slate-900'
+                  }`}>
+                    <div className="flex items-start gap-3">
+                      {message.role === 'assistant' && (
+                        <Bot className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                      )}
+                      {message.role === 'user' && (
+                        <User className="h-5 w-5 text-blue-100 flex-shrink-0 mt-0.5" />
+                      )}
+                      <div className="flex-1">
+                        <p className="text-sm">{message.content}</p>
+                        <div className="text-xs opacity-75 mt-1">
+                          {new Date(message.timestamp).toLocaleTimeString()}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              
+              {isProcessing && (
+                <div className="flex justify-start">
+                  <div className="max-w-3xl p-4 rounded-lg bg-slate-100">
+                    <div className="flex items-center gap-3">
+                      <Bot className="h-5 w-5 text-blue-600" />
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* Chat Input */}
-        <div className="flex gap-3">
-          <div className="flex-1">
-            <textarea
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              placeholder="Describe your ideal customer in natural language... e.g., 'B2B SaaS companies with 50-200 employees using AWS and actively hiring engineers in North America'"
-              className="w-full h-20 px-4 py-3 border border-slate-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleChatSubmit();
-                }
-              }}
-            />
+        <div className="p-6 border-t border-slate-100">
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <textarea
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                placeholder="Describe your ideal customers... e.g., 'Mid-size healthcare organizations implementing digital patient management systems'"
+                className="w-full h-16 px-4 py-3 border border-slate-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleChatSubmit();
+                  }
+                }}
+              />
+            </div>
+            <button
+              onClick={handleChatSubmit}
+              disabled={!chatInput.trim() || isProcessing}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+            >
+              {isProcessing ? (
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
+              Send
+            </button>
           </div>
-          <button
-            onClick={handleChatSubmit}
-            disabled={!chatInput.trim() || isProcessing}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-          >
-            {isProcessing ? (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-            ) : (
-              <Sparkles className="h-4 w-4" />
-            )}
-            {isProcessing ? 'Processing...' : 'Analyze'}
-          </button>
         </div>
       </div>
 
@@ -288,7 +389,7 @@ export function ICPBuilder() {
           
           {description && (
             <div className="mb-4 p-4 bg-white rounded-lg border border-blue-200">
-              <h4 className="font-medium text-slate-900 mb-2">Natural Language Description:</h4>
+              <h4 className="font-medium text-slate-900 mb-2">Description:</h4>
               <p className="text-slate-700 italic">"{description}"</p>
             </div>
           )}
@@ -311,8 +412,8 @@ export function ICPBuilder() {
               <div className="mt-1 text-blue-600 font-semibold">{selectedLocations.length} selected</div>
             </div>
             <div className="bg-white p-3 rounded-lg">
-              <span className="font-medium text-slate-700 block">Growth Stages</span>
-              <div className="mt-1 text-blue-600 font-semibold">{selectedStages.length} selected</div>
+              <span className="font-medium text-slate-700 block">Pain Points</span>
+              <div className="mt-1 text-blue-600 font-semibold">{selectedPainPoints.length} selected</div>
             </div>
             <div className="bg-white p-3 rounded-lg">
               <span className="font-medium text-slate-700 block">Total Criteria</span>
@@ -326,7 +427,7 @@ export function ICPBuilder() {
       <div className="flex items-center justify-center">
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors text-sm"
         >
           <span>Advanced Filters & Refinement</span>
           {showFilters ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -448,118 +549,6 @@ export function ICPBuilder() {
             </div>
           </div>
 
-          {/* Business Models */}
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <Target className="h-5 w-5 text-purple-600" />
-              <h3 className="font-semibold text-slate-900">Business Model</h3>
-              {selectedModels.length > 0 && (
-                <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">
-                  {selectedModels.length}
-                </span>
-              )}
-            </div>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {icpCriteria.business_models.map((model) => (
-                <button
-                  key={model}
-                  onClick={() => handleMultiSelect(model, selectedModels, setSelectedModels)}
-                  className={`w-full px-3 py-2 text-sm rounded-lg border transition-all text-left ${
-                    selectedModels.includes(model)
-                      ? 'bg-purple-50 border-purple-200 text-purple-700'
-                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  {model}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Growth Stages */}
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <TrendingUp className="h-5 w-5 text-orange-600" />
-              <h3 className="font-semibold text-slate-900">Growth Stage</h3>
-              {selectedStages.length > 0 && (
-                <span className="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full">
-                  {selectedStages.length}
-                </span>
-              )}
-            </div>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {icpCriteria.growth_stages.map((stage) => (
-                <button
-                  key={stage}
-                  onClick={() => handleMultiSelect(stage, selectedStages, setSelectedStages)}
-                  className={`w-full px-3 py-2 text-sm rounded-lg border transition-all text-left ${
-                    selectedStages.includes(stage)
-                      ? 'bg-orange-50 border-orange-200 text-orange-700'
-                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  {stage}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Locations */}
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm lg:col-span-2 xl:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <MapPin className="h-5 w-5 text-amber-600" />
-              <h3 className="font-semibold text-slate-900">Locations</h3>
-              {selectedLocations.length > 0 && (
-                <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs rounded-full">
-                  {selectedLocations.length}
-                </span>
-              )}
-            </div>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {icpCriteria.locations.map((location) => (
-                <button
-                  key={location}
-                  onClick={() => handleMultiSelect(location, selectedLocations, setSelectedLocations)}
-                  className={`w-full px-3 py-2 text-sm rounded-lg border transition-all text-left ${
-                    selectedLocations.includes(location)
-                      ? 'bg-amber-50 border-amber-200 text-amber-700'
-                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  {location}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Decision Makers */}
-          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <Users className="h-5 w-5 text-pink-600" />
-              <h3 className="font-semibold text-slate-900">Decision Makers</h3>
-              {selectedDecisionMakers.length > 0 && (
-                <span className="px-2 py-1 bg-pink-100 text-pink-700 text-xs rounded-full">
-                  {selectedDecisionMakers.length}
-                </span>
-              )}
-            </div>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {icpCriteria.decision_makers.map((maker) => (
-                <button
-                  key={maker}
-                  onClick={() => handleMultiSelect(maker, selectedDecisionMakers, setSelectedDecisionMakers)}
-                  className={`w-full px-3 py-2 text-sm rounded-lg border transition-all text-left ${
-                    selectedDecisionMakers.includes(maker)
-                      ? 'bg-pink-50 border-pink-200 text-pink-700'
-                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                  }`}
-                >
-                  {maker}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Pain Points */}
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
@@ -583,6 +572,34 @@ export function ICPBuilder() {
                   }`}
                 >
                   {pain}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Locations */}
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <MapPin className="h-5 w-5 text-amber-600" />
+              <h3 className="font-semibold text-slate-900">Locations</h3>
+              {selectedLocations.length > 0 && (
+                <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs rounded-full">
+                  {selectedLocations.length}
+                </span>
+              )}
+            </div>
+            <div className="space-y-2 max-h-48 overflow-y-auto">
+              {icpCriteria.locations.map((location) => (
+                <button
+                  key={location}
+                  onClick={() => handleMultiSelect(location, selectedLocations, setSelectedLocations)}
+                  className={`w-full px-3 py-2 text-sm rounded-lg border transition-all text-left ${
+                    selectedLocations.includes(location)
+                      ? 'bg-amber-50 border-amber-200 text-amber-700'
+                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
+                  }`}
+                >
+                  {location}
                 </button>
               ))}
             </div>
