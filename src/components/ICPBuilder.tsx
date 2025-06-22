@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Building2, Users, Code, MapPin, Target, Save, DollarSign, TrendingUp, AlertCircle, Clock, MessageSquare, Sparkles, ChevronDown, ChevronUp, Send, User, Bot, X, Tag, Folder, Edit2, Trash2, Plus } from 'lucide-react';
+import { Building2, Users, Code, MapPin, Target, Save, DollarSign, TrendingUp, AlertCircle, Clock, MessageSquare, Sparkles, ChevronDown, ChevronUp, Send, User, Bot, X, Tag, Folder, Edit2, Trash2, Plus, Search, Zap } from 'lucide-react';
 import { InfoModal } from './InfoModal';
 import icpCriteria from '../data/icp_criteria.json';
 
@@ -28,7 +28,11 @@ interface SavedICP {
   last_modified: string;
 }
 
-export function ICPBuilder() {
+interface ICPBuilderProps {
+  onNavigateToTab?: (tabId: string) => void;
+}
+
+export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
   const [chatInput, setChatInput] = useState('');
   const [chatHistory, setChatHistory] = useState<Array<{role: 'user' | 'assistant', content: string, timestamp: number}>>([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -208,7 +212,7 @@ export function ICPBuilder() {
       return "I've analyzed your description and I'm ready to help you build your Ideal Customer Profile. I can help identify specific industries, company sizes, technologies, and other criteria that match your target market. Feel free to use the advanced filters below to refine your targeting further.";
     }
 
-    return `Perfect! I've analyzed your ideal customer description and identified ${matchedCriteria.join(', ')}. I've automatically populated the relevant filters below. You can refine these selections or add additional criteria using the advanced filters. Would you like me to suggest any additional targeting criteria based on your description?`;
+    return `Perfect! I've analyzed your ideal customer description and identified ${matchedCriteria.join(', ')}. I've automatically populated the relevant filters below. You can refine these selections or add additional criteria using the advanced filters. When you're ready, click "Start Discovery" to find companies matching your ICP!`;
   };
 
   const handleMultiSelect = (
@@ -235,6 +239,67 @@ export function ICPBuilder() {
     }
 
     setShowSaveModal(true);
+  };
+
+  const handleStartDiscovery = () => {
+    const totalCriteria = selectedIndustries.length + selectedSizes.length + selectedRevenue.length + 
+      selectedModels.length + selectedStages.length + selectedTechnologies.length + 
+      selectedLocations.length + selectedDecisionMakers.length + selectedPainPoints.length + 
+      selectedBuyingBehavior.length + selectedUrgencyIndicators.length;
+
+    if (totalCriteria === 0 && !description) {
+      alert('Please define your ICP criteria first before starting discovery.');
+      return;
+    }
+
+    // Store current ICP for discovery
+    const currentICP = {
+      id: 'current-session',
+      name: 'Current Session ICP',
+      description: description || 'ICP defined in current session',
+      tags: [],
+      criteria: {
+        industries: selectedIndustries,
+        company_sizes: selectedSizes,
+        revenue_ranges: selectedRevenue,
+        business_models: selectedModels,
+        growth_stages: selectedStages,
+        technologies: selectedTechnologies,
+        locations: selectedLocations,
+        decision_makers: selectedDecisionMakers,
+        pain_points: selectedPainPoints,
+        buying_behavior: selectedBuyingBehavior,
+        urgency_indicators: selectedUrgencyIndicators
+      },
+      chat_description: description,
+      created_at: new Date().toISOString(),
+      last_modified: new Date().toISOString()
+    };
+
+    localStorage.setItem('currentICPForDiscovery', JSON.stringify(currentICP));
+
+    // Navigate to discovery
+    if (onNavigateToTab) {
+      onNavigateToTab('discovery');
+    }
+
+    // Show notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded z-50';
+    notification.innerHTML = `
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <span>Starting company discovery with your ICP...</span>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 3000);
   };
 
   const saveICP = () => {
@@ -377,19 +442,29 @@ export function ICPBuilder() {
               "Automatic filter population based on conversational input",
               "Save and organize multiple ICP definitions with tags",
               "11+ targeting dimensions across all industries and markets",
-              "Real-time ICP validation and criteria refinement"
+              "Seamless transition to company discovery"
             ]}
             businessValue="AI-powered ICP building reduces profile creation time by 60% while increasing targeting accuracy through natural language understanding."
           />
         </div>
-        <button
-          onClick={handleSaveICP}
-          disabled={totalCriteria === 0 && !description}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        >
-          <Save className="h-4 w-4" />
-          Save ICP
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleSaveICP}
+            disabled={totalCriteria === 0 && !description}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            <Save className="h-4 w-4" />
+            Save ICP
+          </button>
+          <button
+            onClick={handleStartDiscovery}
+            disabled={totalCriteria === 0 && !description}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+          >
+            <Search className="h-4 w-4" />
+            Start Discovery
+          </button>
+        </div>
       </div>
 
       {/* Saved ICPs Section */}
@@ -416,15 +491,29 @@ export function ICPBuilder() {
               >
                 <div className="flex items-start justify-between mb-2">
                   <h4 className="font-medium text-slate-900 text-sm">{savedICP.name}</h4>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      deleteSavedICP(savedICP.id);
-                    }}
-                    className="p-1 text-slate-400 hover:text-red-600 transition-colors"
-                  >
-                    <Trash2 className="h-3 w-3" />
-                  </button>
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        loadSavedICP(savedICP);
+                        handleStartDiscovery();
+                      }}
+                      className="p-1 text-slate-400 hover:text-blue-600 transition-colors"
+                      title="Load and start discovery"
+                    >
+                      <Search className="h-3 w-3" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteSavedICP(savedICP.id);
+                      }}
+                      className="p-1 text-slate-400 hover:text-red-600 transition-colors"
+                      title="Delete ICP"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </div>
                 </div>
 
                 {savedICP.description && (
@@ -616,7 +705,16 @@ export function ICPBuilder() {
       {/* ICP Summary */}
       {(totalCriteria > 0 || description) && (
         <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-200">
-          <h3 className="font-semibold text-slate-900 mb-4">Your ICP Profile</h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold text-slate-900">Your ICP Profile</h3>
+            <button
+              onClick={handleStartDiscovery}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >
+              <Search className="h-4 w-4" />
+              Start Discovery
+            </button>
+          </div>
           
           {description && (
             <div className="mb-4 p-4 bg-white rounded-lg border border-blue-200">

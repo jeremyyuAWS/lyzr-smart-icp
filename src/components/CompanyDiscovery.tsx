@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Building, ExternalLink, Sparkles, TrendingUp, Zap, Settings } from 'lucide-react';
+import { Search, Building, ExternalLink, Sparkles, TrendingUp, Zap, Settings, Target, Folder, Play, Loader } from 'lucide-react';
 import { InfoModal } from './InfoModal';
 import { LeadProfileModal } from './LeadProfileModal';
 import { formatScore, getScoreBadgeColor } from '../lib/utils';
@@ -8,6 +8,17 @@ import exaResults from '../data/exa_results.json';
 import phindSignals from '../data/phind_signals.json';
 import perplexityContacts from '../data/perplexity_contacts.json';
 import serpResults from '../data/serp_results.json';
+
+interface SavedICP {
+  id: string;
+  name: string;
+  description: string;
+  tags: string[];
+  criteria: any;
+  chat_description?: string;
+  created_at: string;
+  last_modified: string;
+}
 
 interface CompanyDiscoveryProps {
   onNavigateToTab?: (tabId: string) => void;
@@ -20,11 +31,42 @@ export function CompanyDiscovery({ onNavigateToTab }: CompanyDiscoveryProps) {
   const [demoMode, setDemoMode] = useState(true);
   const [currentStep, setCurrentStep] = useState('');
   const [selectedLead, setSelectedLead] = useState<any>(null);
+  const [selectedICP, setSelectedICP] = useState<SavedICP | null>(null);
+  const [savedICPs, setSavedICPs] = useState<SavedICP[]>([]);
+  const [showICPSelector, setShowICPSelector] = useState(false);
   const [apiKeys, setApiKeys] = useState({
     exa: '',
     phind: '',
     perplexity: ''
   });
+
+  // Load saved ICPs on component mount
+  useEffect(() => {
+    const saved = localStorage.getItem('savedICPs');
+    if (saved) {
+      try {
+        setSavedICPs(JSON.parse(saved));
+      } catch (error) {
+        console.error('Error loading saved ICPs:', error);
+      }
+    }
+
+    // Check for current ICP from ICP Builder
+    const currentICP = localStorage.getItem('currentICPForDiscovery');
+    if (currentICP) {
+      try {
+        const icpData = JSON.parse(currentICP);
+        setSelectedICP(icpData);
+        // Auto-start discovery if coming from ICP Builder
+        setTimeout(() => {
+          startDiscoveryWithICP(icpData);
+        }, 500);
+        localStorage.removeItem('currentICPForDiscovery');
+      } catch (error) {
+        console.error('Error loading current ICP:', error);
+      }
+    }
+  }, []);
 
   const agentSteps = [
     { 
@@ -49,7 +91,15 @@ export function CompanyDiscovery({ onNavigateToTab }: CompanyDiscoveryProps) {
 
   const [agentStatuses, setAgentStatuses] = useState(agentSteps);
 
-  const startDiscovery = async () => {
+  const startDiscovery = () => {
+    if (!selectedICP) {
+      setShowICPSelector(true);
+      return;
+    }
+    startDiscoveryWithICP(selectedICP);
+  };
+
+  const startDiscoveryWithICP = async (icp: SavedICP) => {
     setIsSearching(true);
     setSearchComplete(false);
     setCompanies([]);
@@ -155,6 +205,29 @@ export function CompanyDiscovery({ onNavigateToTab }: CompanyDiscoveryProps) {
     setSelectedLead(company);
   };
 
+  const selectICP = (icp: SavedICP) => {
+    setSelectedICP(icp);
+    setShowICPSelector(false);
+    
+    // Show notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded z-50';
+    notification.innerHTML = `
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <span>ICP selected: ${icp.name}</span>
+      </div>
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 3000);
+  };
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'running':
@@ -181,7 +254,8 @@ export function CompanyDiscovery({ onNavigateToTab }: CompanyDiscoveryProps) {
               "Exa AI for semantic company search beyond keyword matching",
               "Phind agent for technical hiring signals and growth indicators", 
               "Perplexity for contact enrichment and company intelligence",
-              "Real-time API integration with fallback to demo mode"
+              "Real-time API integration with fallback to demo mode",
+              "Seamless ICP integration from builder"
             ]}
             businessValue="AI discovery finds 40% more qualified prospects than traditional search, including emerging companies that competitors miss."
           />
@@ -208,6 +282,71 @@ export function CompanyDiscovery({ onNavigateToTab }: CompanyDiscoveryProps) {
         </div>
       </div>
 
+      {/* ICP Selection */}
+      <div className="bg-white border border-slate-200 rounded-xl p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <Target className="h-5 w-5 text-purple-600" />
+            <h3 className="font-semibold text-slate-900">Target ICP</h3>
+          </div>
+          
+          <button
+            onClick={() => setShowICPSelector(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg transition-colors"
+          >
+            <Folder className="h-4 w-4" />
+            Select ICP
+          </button>
+        </div>
+
+        {selectedICP ? (
+          <div className="p-4 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <h4 className="font-semibold text-slate-900 mb-1">{selectedICP.name}</h4>
+                {selectedICP.description && (
+                  <p className="text-sm text-slate-600 mb-3">{selectedICP.description}</p>
+                )}
+                {selectedICP.chat_description && (
+                  <div className="mb-3">
+                    <span className="text-xs font-medium text-slate-500 block mb-1">Description:</span>
+                    <p className="text-sm text-slate-700 italic">"{selectedICP.chat_description}"</p>
+                  </div>
+                )}
+                <div className="flex flex-wrap gap-2">
+                  {selectedICP.tags.map((tag) => (
+                    <span key={tag} className="px-2 py-0.5 bg-white border border-purple-200 text-purple-700 text-xs rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-sm text-slate-600">Criteria</div>
+                <div className="font-bold text-purple-600">
+                  {Object.values(selectedICP.criteria).flat().length}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <Target className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+            <h4 className="font-medium text-slate-900 mb-2">No ICP Selected</h4>
+            <p className="text-slate-600 text-sm mb-4">
+              Choose a saved ICP definition to start discovering companies that match your ideal customer profile.
+            </p>
+            <button
+              onClick={() => setShowICPSelector(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              <Folder className="h-4 w-4" />
+              Select ICP
+            </button>
+          </div>
+        )}
+      </div>
+
       {!demoMode && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
@@ -218,6 +357,116 @@ export function CompanyDiscovery({ onNavigateToTab }: CompanyDiscoveryProps) {
             Configure your API keys in the Admin Console to use live integrations. 
             Missing keys will fall back to demo mode.
           </p>
+        </div>
+      )}
+
+      {/* ICP Selector Modal */}
+      {showICPSelector && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+            <div className="p-6 border-b border-slate-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Folder className="h-5 w-5 text-purple-600" />
+                  <h3 className="text-xl font-bold text-slate-900">Select Target ICP</h3>
+                </div>
+                <button
+                  onClick={() => setShowICPSelector(false)}
+                  className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                >
+                  <span className="text-slate-400 text-xl">×</span>
+                </button>
+              </div>
+              <p className="text-slate-600 mt-2">Choose which Ideal Customer Profile to use for discovery</p>
+            </div>
+            
+            <div className="p-6 overflow-y-auto max-h-[60vh]">
+              {savedICPs.length === 0 ? (
+                <div className="text-center py-12">
+                  <Target className="h-12 w-12 text-slate-300 mx-auto mb-4" />
+                  <h4 className="font-medium text-slate-900 mb-2">No Saved ICPs</h4>
+                  <p className="text-slate-600 mb-4">Create your first ICP definition in the ICP Builder tab.</p>
+                  <button
+                    onClick={() => {
+                      setShowICPSelector(false);
+                      if (onNavigateToTab) {
+                        onNavigateToTab('icp-builder');
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    <Target className="h-4 w-4" />
+                    Go to ICP Builder
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {savedICPs.map((icp) => (
+                    <div
+                      key={icp.id}
+                      onClick={() => selectICP(icp)}
+                      className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
+                        selectedICP?.id === icp.id
+                          ? 'border-purple-300 bg-purple-50'
+                          : 'border-slate-200 hover:border-slate-300'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <h4 className="font-semibold text-slate-900">{icp.name}</h4>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            selectICP(icp);
+                            startDiscoveryWithICP(icp);
+                          }}
+                          className="p-1 text-slate-400 hover:text-blue-600 transition-colors"
+                          title="Select and start discovery"
+                        >
+                          <Play className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      {icp.description && (
+                        <p className="text-sm text-slate-600 mb-3">{icp.description}</p>
+                      )}
+
+                      {icp.chat_description && (
+                        <div className="mb-3">
+                          <span className="text-xs font-medium text-slate-500 block mb-1">Target:</span>
+                          <p className="text-xs text-slate-600 italic line-clamp-2">"{icp.chat_description}"</p>
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-wrap gap-1">
+                          {icp.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} className="px-2 py-0.5 bg-slate-100 text-slate-700 text-xs rounded">
+                              {tag}
+                            </span>
+                          ))}
+                          {icp.tags.length > 3 && (
+                            <span className="text-xs text-slate-500">+{icp.tags.length - 3}</span>
+                          )}
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-slate-900">
+                            {Object.values(icp.criteria).flat().length}
+                          </div>
+                          <div className="text-xs text-slate-500">criteria</div>
+                        </div>
+                      </div>
+
+                      {selectedICP?.id === icp.id && (
+                        <div className="mt-2 px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">
+                          Currently selected
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       )}
 
