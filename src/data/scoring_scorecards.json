@@ -1,0 +1,126 @@
+{
+  "scoring_scorecards": [
+    {
+      "lead_id": "lead_001",
+      "company": "GridTech Solutions",
+      "overall_score": 0.94,
+      "scorecard_breakdown": {
+        "industry_match": {
+          "score": 1.0,
+          "status": "perfect",
+          "details": "Electric Utilities - exact ICP match",
+          "weight": 0.25
+        },
+        "company_size": {
+          "score": 0.95,
+          "status": "excellent",
+          "details": "1,200 employees - ideal target size",
+          "weight": 0.20
+        },
+        "technology_stack": {
+          "score": 0.92,
+          "status": "strong",
+          "details": "Uses SCADA, AWS, IoT - strong tech alignment",
+          "weight": 0.20
+        },
+        "growth_signals": {
+          "score": 0.96,
+          "status": "excellent",
+          "details": "Recent Series B, hiring surge, partnerships",
+          "weight": 0.15
+        },
+        "contact_quality": {
+          "score": 0.89,
+          "status": "good",
+          "details": "VP level contact with verified email",
+          "weight": 0.10
+        },
+        "geographic_fit": {
+          "score": 0.95,
+          "status": "excellent", 
+          "details": "Northeast region - primary target market",
+          "weight": 0.10
+        }
+      },
+      "positive_indicators": [
+        "✓ Perfect industry match - Electric Utilities",
+        "✓ Ideal company size - 1,200 employees", 
+        "✓ Strong technology alignment - SCADA, IoT",
+        "✓ Recent Series B funding - $25M",
+        "✓ Active hiring in grid analytics",
+        "✓ Target geography - Northeast"
+      ],
+      "areas_for_improvement": [
+        "→ Email could be more specific (not generic)",
+        "→ Additional decision maker contacts needed"
+      ],
+      "recommended_next_steps": [
+        "Immediate outreach - high priority",
+        "Focus on grid modernization messaging",
+        "Request intro to CTO/VP Engineering",
+        "Share utility customer case studies"
+      ]
+    },
+    {
+      "lead_id": "lead_002",
+      "company": "CleanPower Analytics", 
+      "overall_score": 0.89,
+      "scorecard_breakdown": {
+        "industry_match": {
+          "score": 0.95,
+          "status": "excellent",
+          "details": "Renewable Energy - strong ICP alignment",
+          "weight": 0.25
+        },
+        "company_size": {
+          "score": 0.85,
+          "status": "good",
+          "details": "180 employees - good target size",
+          "weight": 0.20
+        },
+        "technology_stack": {
+          "score": 0.88,
+          "status": "good",
+          "details": "Python, TensorFlow, Azure - solid tech stack",
+          "weight": 0.20
+        },
+        "growth_signals": {
+          "score": 0.92,
+          "status": "excellent",
+          "details": "Series A funding, customer wins, compliance",
+          "weight": 0.15
+        },
+        "contact_quality": {
+          "score": 0.91,
+          "status": "excellent",
+          "details": "CEO with CAISO background - perfect contact",
+          "weight": 0.10
+        },
+        "geographic_fit": {
+          "score": 0.88,
+          "status": "good",
+          "details": "West Coast - secondary target market",
+          "weight": 0.10
+        }
+      },
+      "positive_indicators": [
+        "✓ Strong renewable energy focus",
+        "✓ CEO with CAISO utility background",
+        "✓ Recent Series A funding - $18M", 
+        "✓ AI/ML forecasting capabilities",
+        "✓ Strong utility customer base",
+        "✓ ISO market expansion"
+      ],
+      "areas_for_improvement": [
+        "→ Could use additional engineering contacts",
+        "→ Technology stack partially aligned"
+      ],
+      "recommended_next_steps": [
+        "Schedule renewable energy integration demo",
+        "Highlight forecasting accuracy improvements",
+        "Connect with CTO Michael Thompson",
+        "Share CAISO integration case studies"
+      ]
+    }
+  ]
+}

@@ -21,6 +21,10 @@ import { ABTestingDashboard } from './components/ABTestingDashboard';
 import { RealTimeAlerts } from './components/RealTimeAlerts';
 import { WorkflowTriggers } from './components/WorkflowTriggers';
 import { PredictiveAnalytics } from './components/PredictiveAnalytics';
+import { LeadQualityAnalyzer } from './components/LeadQualityAnalyzer';
+import { LeadClustering } from './components/LeadClustering';
+import { ScorecardRenderer } from './components/ScorecardRenderer';
+import { AccountRollupView } from './components/AccountRollupView';
 
 function App() {
   const [isAdminView, setIsAdminView] = useState(false);
@@ -73,10 +77,14 @@ function App() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-18 lg:w-auto lg:inline-flex mb-8">
+          <TabsList className="grid w-full grid-cols-22 lg:w-auto lg:inline-flex mb-8">
             <TabsTrigger value="icp-builder">ICP Builder</TabsTrigger>
             <TabsTrigger value="discovery">Discovery</TabsTrigger>
             <TabsTrigger value="scoring">Scoring</TabsTrigger>
+            <TabsTrigger value="scorecards">Scorecards</TabsTrigger>
+            <TabsTrigger value="clustering">Clustering</TabsTrigger>
+            <TabsTrigger value="quality">Quality</TabsTrigger>
+            <TabsTrigger value="accounts">Accounts</TabsTrigger>
             <TabsTrigger value="lifecycle">Pipeline</TabsTrigger>
             <TabsTrigger value="emails">Emails</TabsTrigger>
             <TabsTrigger value="orchestration">Orchestration</TabsTrigger>
@@ -105,6 +113,22 @@ function App() {
 
           <TabsContent value="scoring" className="space-y-6">
             <LeadScoring onNavigateToTab={switchToTab} />
+          </TabsContent>
+
+          <TabsContent value="scorecards" className="space-y-6">
+            <ScorecardRenderer />
+          </TabsContent>
+
+          <TabsContent value="clustering" className="space-y-6">
+            <LeadClustering />
+          </TabsContent>
+
+          <TabsContent value="quality" className="space-y-6">
+            <LeadQualityAnalyzer />
+          </TabsContent>
+
+          <TabsContent value="accounts" className="space-y-6">
+            <AccountRollupView />
           </TabsContent>
 
           <TabsContent value="lifecycle" className="space-y-6">

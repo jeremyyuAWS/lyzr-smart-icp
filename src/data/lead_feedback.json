@@ -1,0 +1,55 @@
+{
+  "lead_feedback": [
+    {
+      "lead_id": "lead_001",
+      "company": "GridTech Solutions",
+      "contact": "Sarah Mitchell",
+      "feedback_date": "2024-01-15",
+      "status": "contacted",
+      "outcome": "replied",
+      "conversion_stage": "qualified",
+      "feedback_notes": "Positive response, scheduled demo for next week",
+      "predicted_score": 0.94,
+      "actual_outcome": "positive",
+      "score_accuracy": 0.95
+    },
+    {
+      "lead_id": "lead_002", 
+      "company": "CleanPower Analytics",
+      "contact": "Dr. Elena Rodriguez",
+      "feedback_date": "2024-01-14",
+      "status": "contacted",
+      "outcome": "no_reply",
+      "conversion_stage": "contacted",
+      "feedback_notes": "Follow-up needed, may be on vacation",
+      "predicted_score": 0.89,
+      "actual_outcome": "pending",
+      "score_accuracy": null
+    },
+    {
+      "lead_id": "lead_003",
+      "company": "EnergyFlow Systems", 
+      "contact": "Robert Kim",
+      "feedback_date": "2024-01-13",
+      "status": "contacted",
+      "outcome": "replied",
+      "conversion_stage": "opportunity",
+      "feedback_notes": "Very interested, sent proposal",
+      "predicted_score": 0.86,
+      "actual_outcome": "positive",
+      "score_accuracy": 0.91
+    }
+  ],
+  "feedback_analytics": {
+    "total_leads_tracked": 156,
+    "contacted_rate": 0.78,
+    "reply_rate": 0.34,
+    "conversion_rate": 0.23,
+    "score_accuracy": 0.88,
+    "improvement_areas": [
+      "Better qualification of 60-70% score range",
+      "Improve timing recommendations",
+      "Enhanced persona segmentation"
+    ]
+  }
+}

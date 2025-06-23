@@ -1,0 +1,80 @@
+{
+  "lead_clusters": [
+    {
+      "cluster_id": "cluster_001",
+      "name": "High-Growth Grid Modernizers",
+      "description": "Established utility companies actively modernizing grid infrastructure with strong funding",
+      "size": 23,
+      "characteristics": {
+        "avg_company_size": "1,000-5,000 employees",
+        "industries": ["Electric Utilities", "Grid Infrastructure"],
+        "growth_stage": "Established with modernization focus",
+        "key_technologies": ["Smart Grid", "SCADA", "IoT"],
+        "funding_status": "Well-funded utility programs"
+      },
+      "typical_contacts": ["VP of Grid Operations", "Director of Engineering", "Chief Technology Officer"],
+      "recommended_messaging": [
+        "Focus on grid reliability and efficiency gains",
+        "Emphasize regulatory compliance benefits",
+        "Highlight proven utility partnerships",
+        "ROI case studies from similar utilities"
+      ],
+      "conversion_rate": 0.41,
+      "avg_deal_size": "$450K",
+      "sales_cycle": "9-12 months"
+    },
+    {
+      "cluster_id": "cluster_002", 
+      "name": "Renewable Energy Innovators",
+      "description": "Clean energy companies focused on solar, wind, and energy storage solutions",
+      "size": 34,
+      "characteristics": {
+        "avg_company_size": "50-500 employees",
+        "industries": ["Solar Power", "Wind Energy", "Energy Storage"],
+        "growth_stage": "Rapid scaling with VC backing",
+        "key_technologies": ["Energy Storage", "IoT", "Analytics"],
+        "funding_status": "Series A-C funding"
+      },
+      "typical_contacts": ["CEO", "VP of Engineering", "Head of Product"],
+      "recommended_messaging": [
+        "Sustainability and carbon reduction focus",
+        "Technology innovation and scalability",
+        "Market expansion opportunities",
+        "Integration with renewable assets"
+      ],
+      "conversion_rate": 0.28,
+      "avg_deal_size": "$125K",
+      "sales_cycle": "4-6 months"
+    },
+    {
+      "cluster_id": "cluster_003",
+      "name": "Energy Tech Startups", 
+      "description": "Early-stage energy technology companies building innovative solutions",
+      "size": 45,
+      "characteristics": {
+        "avg_company_size": "10-100 employees",
+        "industries": ["Energy Management", "Smart Grid Technology"],
+        "growth_stage": "Seed to Series A",
+        "key_technologies": ["AI/ML", "Cloud", "Mobile"],
+        "funding_status": "Seed to Series A funding"
+      },
+      "typical_contacts": ["Founder", "CTO", "Head of Engineering"],
+      "recommended_messaging": [
+        "Speed to market and agility",
+        "Cost-effective solutions",
+        "Partnership and integration opportunities",
+        "Technical innovation and differentiation"
+      ],
+      "conversion_rate": 0.19,
+      "avg_deal_size": "$45K",
+      "sales_cycle": "2-4 months"
+    }
+  ],
+  "clustering_metadata": {
+    "last_updated": "2024-01-15",
+    "total_leads_clustered": 156,
+    "clustering_algorithm": "K-means with domain expertise",
+    "cluster_quality_score": 0.87,
+    "recommended_refresh_interval": "monthly"
+  }
+}

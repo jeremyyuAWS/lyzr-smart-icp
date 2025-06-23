@@ -1,0 +1,142 @@
+{
+  "account_rollups": [
+    {
+      "account_id": "acc_001",
+      "account_name": "GridTech Solutions",
+      "domain": "gridtechsolutions.com",
+      "org_score": 94,
+      "total_contacts": 3,
+      "account_insights": {
+        "total_employees": 1200,
+        "decision_maker_coverage": 0.67,
+        "influence_network_mapped": true,
+        "buying_committee_identified": true,
+        "estimated_deal_size": "$450K-750K",
+        "sales_cycle_estimate": "9-12 months"
+      },
+      "contacts": [
+        {
+          "contact_id": "contact_001",
+          "name": "Sarah Mitchell",
+          "title": "CEO & Co-founder",
+          "email": "sarah@gridtechsolutions.com",
+          "linkedin": "linkedin.com/in/sarahmitchell-grid",
+          "level": "executive",
+          "influence_score": 0.95,
+          "decision_power": "final_approver",
+          "background": "Former VP Engineering at GE Grid Solutions, MIT Power Systems",
+          "recent_activity": ["Spoke at grid modernization conference", "Announced Series B funding"],
+          "contact_status": "not_contacted"
+        },
+        {
+          "contact_id": "contact_002", 
+          "name": "David Chen",
+          "title": "VP of Product",
+          "email": "david.c@gridtechsolutions.com",
+          "linkedin": "linkedin.com/in/davidchen-energy",
+          "level": "decision_maker",
+          "influence_score": 0.82,
+          "decision_power": "technical_evaluator",
+          "background": "Ex-Schneider Electric, 12+ years in grid automation",
+          "recent_activity": ["Posted about smart grid trends", "Attending IEEE conference"],
+          "contact_status": "not_contacted"
+        },
+        {
+          "contact_id": "contact_003",
+          "name": "Mike Rodriguez",
+          "title": "Director of Engineering",
+          "email": "mike.r@gridtechsolutions.com", 
+          "linkedin": "linkedin.com/in/mikerodriguez-tech",
+          "level": "influencer",
+          "influence_score": 0.68,
+          "decision_power": "technical_influencer",
+          "background": "Led SCADA implementations, expert in utility systems",
+          "recent_activity": ["Hiring for grid analytics team", "Published technical blog post"],
+          "contact_status": "not_contacted"
+        }
+      ],
+      "buying_committee": {
+        "economic_buyer": "Sarah Mitchell (CEO)",
+        "technical_buyer": "David Chen (VP Product)",
+        "user_buyer": "Mike Rodriguez (Dir Engineering)",
+        "champion_potential": "David Chen - strong technical background",
+        "blockers_identified": "None identified",
+        "budget_authority": "Sarah Mitchell"
+      },
+      "recommended_strategy": {
+        "primary_contact": "Sarah Mitchell",
+        "secondary_contacts": ["David Chen", "Mike Rodriguez"],
+        "messaging_approach": "Executive value proposition with technical depth",
+        "meeting_format": "Executive briefing + technical deep dive",
+        "timeline": "Q1 2024 for initial meetings"
+      }
+    },
+    {
+      "account_id": "acc_002",
+      "account_name": "CleanPower Analytics",
+      "domain": "cleanpoweranalytics.com", 
+      "org_score": 89,
+      "total_contacts": 2,
+      "account_insights": {
+        "total_employees": 180,
+        "decision_maker_coverage": 0.85,
+        "influence_network_mapped": false,
+        "buying_committee_identified": true,
+        "estimated_deal_size": "$125K-200K",
+        "sales_cycle_estimate": "4-6 months"
+      },
+      "contacts": [
+        {
+          "contact_id": "contact_004",
+          "name": "Dr. Elena Rodriguez",
+          "title": "CEO",
+          "email": "elena@cleanpoweranalytics.com",
+          "linkedin": "linkedin.com/in/elenarodriguez-phd",
+          "level": "executive",
+          "influence_score": 0.93,
+          "decision_power": "final_approver",
+          "background": "Former Director of Renewable Integration, CAISO, Stanford PhD",
+          "recent_activity": ["Keynote at renewable energy summit", "Series A announcement"],
+          "contact_status": "not_contacted"
+        },
+        {
+          "contact_id": "contact_005",
+          "name": "Michael Thompson", 
+          "title": "CTO",
+          "email": "michael@cleanpoweranalytics.com",
+          "linkedin": "linkedin.com/in/mthompson-cleantech",
+          "level": "decision_maker",
+          "influence_score": 0.87,
+          "decision_power": "technical_evaluator",
+          "background": "Ex-Tesla Energy, UC Berkeley Engineering",
+          "recent_activity": ["Posted about ML forecasting", "Hiring data scientists"],
+          "contact_status": "not_contacted"
+        }
+      ],
+      "buying_committee": {
+        "economic_buyer": "Dr. Elena Rodriguez (CEO)",
+        "technical_buyer": "Michael Thompson (CTO)",
+        "user_buyer": "Michael Thompson (CTO)",
+        "champion_potential": "Michael Thompson - technical alignment",
+        "blockers_identified": "None identified",
+        "budget_authority": "Dr. Elena Rodriguez"
+      },
+      "recommended_strategy": {
+        "primary_contact": "Dr. Elena Rodriguez",
+        "secondary_contacts": ["Michael Thompson"],
+        "messaging_approach": "Renewable energy ROI with CAISO experience",
+        "meeting_format": "Executive + technical combined meeting",
+        "timeline": "Q1 2024 for demo"
+      }
+    }
+  ],
+  "rollup_analytics": {
+    "total_accounts": 2,
+    "total_contacts": 5,
+    "avg_contacts_per_account": 2.5,
+    "decision_maker_coverage": 0.76,
+    "executive_coverage": 1.0,
+    "total_pipeline_value": "$1.2M",
+    "avg_deal_size": "$450K"
+  }
+}
