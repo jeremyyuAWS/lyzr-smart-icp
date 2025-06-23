@@ -61,11 +61,12 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
   const [savedICPs, setSavedICPs] = useState<SavedICP[]>([]);
   const [selectedSavedICP, setSelectedSavedICP] = useState<string | null>(null);
 
-  // Available tags (could be expanded with user-defined tags)
+  // Available tags (energy-focused)
   const [availableTags] = useState([
-    'Technology', 'Healthcare', 'Finance', 'Manufacturing', 'Retail', 'Education',
-    'Enterprise', 'SMB', 'Startup', 'High-Value', 'Quick-Win', 'Strategic',
-    'North America', 'Europe', 'APAC', 'Global', 'SaaS', 'AI/ML', 'Cloud'
+    'Electric Utilities', 'Renewable Energy', 'Smart Grid', 'Energy Storage', 'Grid Modernization',
+    'Clean Technology', 'Power Generation', 'Transmission', 'Distribution', 'Energy Trading',
+    'Regulatory Compliance', 'Energy Analytics', 'IoT', 'SCADA', 'DERMS', 'High-Value', 'Strategic',
+    'North America', 'Europe', 'APAC', 'Global', 'Municipal', 'Cooperative', 'IPP'
   ]);
 
   // Load saved ICPs on component mount
@@ -85,14 +86,14 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
     localStorage.setItem('savedICPs', JSON.stringify(savedICPs));
   }, [savedICPs]);
 
-  // Example prompts spanning different industries
+  // Energy sector example prompts
   const examplePrompts = [
-    "Mid-size manufacturing companies implementing digital transformation initiatives in the Midwest",
-    "Healthcare organizations with 200-500 employees adopting new patient management systems",
-    "Financial services firms facing regulatory compliance challenges and seeking automation solutions",
-    "Retail chains expanding their e-commerce capabilities and customer analytics",
-    "Professional services companies transitioning to remote work and digital collaboration tools",
-    "Construction companies investing in project management software and IoT solutions"
+    "Regional electric utilities implementing smart grid modernization programs in the Northeast ISO market",
+    "Municipal power authorities with 100-500 employees adopting advanced metering infrastructure and demand response systems",
+    "Independent power producers developing renewable energy projects with grid integration challenges",
+    "Energy storage companies deploying battery systems for grid services and frequency regulation",
+    "Transmission system operators managing distributed energy resources and grid stability",
+    "Clean technology companies providing energy analytics and grid optimization solutions for utilities"
   ];
 
   const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
@@ -135,55 +136,58 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
     const parsed: any = {};
     const lowerText = text.toLowerCase();
 
-    // Industry parsing - more comprehensive
+    // Energy industry parsing
     const industries = icpCriteria.industries.filter(industry => 
       lowerText.includes(industry.toLowerCase()) || 
       lowerText.includes(industry.split(' ')[0].toLowerCase()) ||
-      (industry.includes('Technology') && (lowerText.includes('tech') || lowerText.includes('software'))) ||
-      (industry.includes('Healthcare') && (lowerText.includes('health') || lowerText.includes('medical'))) ||
-      (industry.includes('Financial') && (lowerText.includes('finance') || lowerText.includes('banking'))) ||
-      (industry.includes('Manufacturing') && lowerText.includes('manufacturing')) ||
-      (industry.includes('Retail') && (lowerText.includes('retail') || lowerText.includes('e-commerce')))
+      (industry.includes('Electric Utilities') && (lowerText.includes('utility') || lowerText.includes('electric'))) ||
+      (industry.includes('Renewable Energy') && (lowerText.includes('renewable') || lowerText.includes('solar') || lowerText.includes('wind'))) ||
+      (industry.includes('Smart Grid') && lowerText.includes('smart grid')) ||
+      (industry.includes('Energy Storage') && (lowerText.includes('storage') || lowerText.includes('battery'))) ||
+      (industry.includes('Grid Infrastructure') && lowerText.includes('grid'))
     );
     if (industries.length > 0) parsed.industries = industries;
 
-    // Technology parsing
+    // Energy technology parsing
     const technologies = icpCriteria.technologies.filter(tech => 
       lowerText.includes(tech.toLowerCase().split(' ')[0]) ||
       lowerText.includes(tech.toLowerCase()) ||
-      (tech.includes('Digital') && lowerText.includes('digital')) ||
-      (tech.includes('Cloud') && lowerText.includes('cloud'))
+      (tech.includes('Smart Grid') && lowerText.includes('smart grid')) ||
+      (tech.includes('SCADA') && lowerText.includes('scada')) ||
+      (tech.includes('Advanced Metering') && lowerText.includes('metering'))
     );
     if (technologies.length > 0) parsed.technologies = technologies;
 
-    // Location parsing
+    // Location parsing for energy markets
     const locations = icpCriteria.locations.filter(location => 
       lowerText.includes(location.toLowerCase()) ||
-      (location.includes('Midwest') && lowerText.includes('midwest'))
+      (location.includes('Northeast') && lowerText.includes('northeast')) ||
+      (location.includes('ISO') && lowerText.includes('iso')) ||
+      (location.includes('CAISO') && lowerText.includes('california'))
     );
     if (locations.length > 0) parsed.locations = locations;
 
-    // Size parsing - more nuanced
-    if (lowerText.includes('startup') || lowerText.includes('early stage')) {
-      parsed.company_sizes = ['Startup (Bootstrapped)', 'Seed Stage'];
+    // Size parsing for energy sector
+    if (lowerText.includes('municipal') || lowerText.includes('public power')) {
+      parsed.company_sizes = ['Municipal Utility (50-200)'];
     }
-    if (lowerText.includes('enterprise') || lowerText.includes('large')) {
-      parsed.company_sizes = ['Large Enterprise (5,000-19,999)', 'Fortune 500 (20,000+)'];
+    if (lowerText.includes('regional') || lowerText.includes('medium')) {
+      parsed.company_sizes = ['Regional Utility (200-1,000)', 'Regional Energy Provider (1,000-5,000)'];
     }
-    if (lowerText.includes('mid-size') || lowerText.includes('medium') || (lowerText.includes('200') && lowerText.includes('500'))) {
-      parsed.company_sizes = ['Medium Business (50-249)', 'Large Business (250-999)'];
+    if (lowerText.includes('major') || lowerText.includes('large') || lowerText.includes('fortune')) {
+      parsed.company_sizes = ['Major Utility (5,000-20,000)', 'Fortune 500 Energy (20,000+)'];
     }
-    if (lowerText.includes('small business') || lowerText.includes('smb')) {
-      parsed.company_sizes = ['Small Business (10-49)'];
+    if (lowerText.includes('independent') || lowerText.includes('ipp')) {
+      parsed.company_sizes = ['Independent Power Producer (IPP)'];
     }
 
-    // Pain points parsing
+    // Pain points parsing for energy sector
     const painPoints = icpCriteria.pain_points.filter(pain => {
       const painLower = pain.toLowerCase();
       return lowerText.includes(painLower) ||
-        (painLower.includes('digital transformation') && lowerText.includes('digital')) ||
-        (painLower.includes('compliance') && lowerText.includes('compliance')) ||
-        (painLower.includes('remote work') && lowerText.includes('remote'))
+        (painLower.includes('grid modernization') && lowerText.includes('modernization')) ||
+        (painLower.includes('renewable') && lowerText.includes('renewable')) ||
+        (painLower.includes('smart grid') && lowerText.includes('smart grid'))
     });
     if (painPoints.length > 0) parsed.pain_points = painPoints;
 
@@ -202,17 +206,17 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
 
   const generateAIResponse = (parsed: any): string => {
     const matchedCriteria = [];
-    if (parsed.industries) matchedCriteria.push(`${parsed.industries.length} industry matches`);
+    if (parsed.industries) matchedCriteria.push(`${parsed.industries.length} energy sector matches`);
     if (parsed.technologies) matchedCriteria.push(`${parsed.technologies.length} technology matches`);
     if (parsed.locations) matchedCriteria.push(`location targeting set`);
-    if (parsed.company_sizes) matchedCriteria.push(`company size criteria applied`);
-    if (parsed.pain_points) matchedCriteria.push(`pain points identified`);
+    if (parsed.company_sizes) matchedCriteria.push(`utility size criteria applied`);
+    if (parsed.pain_points) matchedCriteria.push(`energy challenges identified`);
 
     if (matchedCriteria.length === 0) {
-      return "I've analyzed your description and I'm ready to help you build your Ideal Customer Profile. I can help identify specific industries, company sizes, technologies, and other criteria that match your target market. Feel free to use the advanced filters below to refine your targeting further.";
+      return "I've analyzed your energy sector description and I'm ready to help you build your Ideal Customer Profile. I can help identify specific utility types, energy technologies, grid modernization needs, and other criteria that match your target market. Feel free to use the advanced filters below to refine your energy sector targeting further.";
     }
 
-    return `Perfect! I've analyzed your ideal customer description and identified ${matchedCriteria.join(', ')}. I've automatically populated the relevant filters below. You can refine these selections or add additional criteria using the advanced filters. When you're ready, click "Start Discovery" to find companies matching your ICP!`;
+    return `Excellent! I've analyzed your energy sector customer description and identified ${matchedCriteria.join(', ')}. I've automatically populated the relevant energy industry filters below. You can refine these selections or add additional criteria using the advanced filters. When you're ready, click "Start Discovery" to find energy companies matching your ICP!`;
   };
 
   const handleMultiSelect = (
@@ -291,7 +295,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
         </svg>
-        <span>Starting company discovery with your ICP...</span>
+        <span>Starting energy sector discovery with your ICP...</span>
       </div>
     `;
     document.body.appendChild(notification);
@@ -433,18 +437,18 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Target className="h-6 w-6 text-blue-600" />
-          <h2 className="text-2xl font-bold text-slate-900">Define Your Ideal Customer Profile</h2>
+          <h2 className="text-2xl font-bold text-slate-900">Define Your Energy Sector ICP</h2>
           <InfoModal
-            title="AI-Powered ICP Builder"
-            description="Describe your ideal customer in natural language and let AI automatically extract and apply relevant targeting criteria across industries."
+            title="AI-Powered Energy Sector ICP Builder"
+            description="Describe your ideal energy sector customers in natural language and let AI automatically extract and apply relevant targeting criteria across utilities, clean tech, and grid infrastructure."
             features={[
-              "Natural language processing for intuitive customer description",
-              "Automatic filter population based on conversational input",
-              "Save and organize multiple ICP definitions with tags",
-              "11+ targeting dimensions across all industries and markets",
-              "Seamless transition to company discovery"
+              "Natural language processing for energy sector customer descriptions",
+              "Automatic filter population for utilities, clean tech, and grid companies",
+              "Save and organize multiple energy sector ICP definitions with tags",
+              "25+ targeting dimensions specific to energy markets and technologies",
+              "Seamless transition to energy company discovery"
             ]}
-            businessValue="AI-powered ICP building reduces profile creation time by 60% while increasing targeting accuracy through natural language understanding."
+            businessValue="AI-powered energy sector ICP building reduces profile creation time by 60% while increasing targeting accuracy through natural language understanding of utility and energy market dynamics."
           />
         </div>
         <div className="flex items-center gap-3">
@@ -472,7 +476,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
         <div className="bg-white border border-slate-200 rounded-xl p-6">
           <div className="flex items-center gap-3 mb-4">
             <Folder className="h-5 w-5 text-purple-600" />
-            <h3 className="font-semibold text-slate-900">Saved ICP Definitions</h3>
+            <h3 className="font-semibold text-slate-900">Saved Energy Sector ICPs</h3>
             <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full">
               {savedICPs.length}
             </span>
@@ -482,12 +486,12 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
             {savedICPs.map((savedICP) => (
               <div
                 key={savedICP.id}
-                className={`p-4 border rounded-lg transition-all cursor-pointer hover:shadow-md ${
+                onClick={() => loadSavedICP(savedICP)}
+                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
                   selectedSavedICP === savedICP.id
                     ? 'border-blue-300 bg-blue-50'
                     : 'border-slate-200 hover:border-slate-300'
                 }`}
-                onClick={() => loadSavedICP(savedICP)}
               >
                 <div className="flex items-start justify-between mb-2">
                   <h4 className="font-medium text-slate-900 text-sm">{savedICP.name}</h4>
@@ -564,10 +568,10 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
         <div className="p-6 border-b border-slate-100">
           <div className="flex items-center gap-3 mb-2">
             <MessageSquare className="h-5 w-5 text-blue-600" />
-            <h3 className="font-semibold text-slate-900">Describe Your Ideal Customer</h3>
+            <h3 className="font-semibold text-slate-900">Describe Your Ideal Energy Customers</h3>
           </div>
           <p className="text-slate-600 text-sm">
-            Tell me about the types of companies you want to target. I'll help you build a comprehensive customer profile.
+            Tell me about the types of energy companies you want to target. I'll help you build a comprehensive customer profile for the energy sector.
           </p>
         </div>
 
@@ -579,9 +583,9 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Bot className="h-8 w-8 text-blue-600" />
                 </div>
-                <h4 className="font-medium text-slate-900 mb-2">Let's build your Ideal Customer Profile</h4>
+                <h4 className="font-medium text-slate-900 mb-2">Let's build your Energy Sector ICP</h4>
                 <p className="text-slate-600 text-sm mb-6">
-                  Describe your target customers in your own words. I'll identify the key criteria and help you refine your targeting.
+                  Describe your target energy customers in your own words. I'll identify the key criteria and help you refine your targeting.
                 </p>
 
                 {/* Auto-rotating Example */}
@@ -608,7 +612,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
                 {/* More Examples Button */}
                 <details className="text-left">
                   <summary className="text-xs text-blue-600 hover:text-blue-700 cursor-pointer mb-3">
-                    Show more examples
+                    Show more energy sector examples
                   </summary>
                   <div className="grid gap-2">
                     {examplePrompts.filter((_, i) => i !== currentExampleIndex).map((prompt, index) => (
@@ -676,7 +680,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
               <textarea
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
-                placeholder="Describe your ideal customers... e.g., 'Mid-size healthcare organizations implementing digital patient management systems'"
+                placeholder="Describe your ideal energy customers... e.g., 'Regional electric utilities implementing smart grid modernization programs in the Northeast ISO market'"
                 className="w-full h-16 px-4 py-3 border border-slate-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey) {
@@ -706,7 +710,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
       {(totalCriteria > 0 || description) && (
         <div className="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-200">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-slate-900">Your ICP Profile</h3>
+            <h3 className="font-semibold text-slate-900">Your Energy Sector ICP Profile</h3>
             <button
               onClick={handleStartDiscovery}
               className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
@@ -725,23 +729,23 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-sm">
             <div className="bg-white p-3 rounded-lg">
-              <span className="font-medium text-slate-700 block">Industries</span>
+              <span className="font-medium text-slate-700 block">Energy Industries</span>
               <div className="mt-1 text-blue-600 font-semibold">{selectedIndustries.length} selected</div>
             </div>
             <div className="bg-white p-3 rounded-lg">
-              <span className="font-medium text-slate-700 block">Company Sizes</span>
+              <span className="font-medium text-slate-700 block">Utility Sizes</span>
               <div className="mt-1 text-blue-600 font-semibold">{selectedSizes.length} selected</div>
             </div>
             <div className="bg-white p-3 rounded-lg">
-              <span className="font-medium text-slate-700 block">Technologies</span>
+              <span className="font-medium text-slate-700 block">Energy Technologies</span>
               <div className="mt-1 text-blue-600 font-semibold">{selectedTechnologies.length} selected</div>
             </div>
             <div className="bg-white p-3 rounded-lg">
-              <span className="font-medium text-slate-700 block">Locations</span>
+              <span className="font-medium text-slate-700 block">Energy Markets</span>
               <div className="mt-1 text-blue-600 font-semibold">{selectedLocations.length} selected</div>
             </div>
             <div className="bg-white p-3 rounded-lg">
-              <span className="font-medium text-slate-700 block">Pain Points</span>
+              <span className="font-medium text-slate-700 block">Energy Challenges</span>
               <div className="mt-1 text-blue-600 font-semibold">{selectedPainPoints.length} selected</div>
             </div>
             <div className="bg-white p-3 rounded-lg">
@@ -758,7 +762,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
           onClick={() => setShowFilters(!showFilters)}
           className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors text-sm"
         >
-          <span>Advanced Filters & Refinement</span>
+          <span>Advanced Energy Sector Filters & Refinement</span>
           {showFilters ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </button>
       </div>
@@ -766,11 +770,11 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
       {/* Advanced Filter Grid */}
       {showFilters && (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-          {/* Industries */}
+          {/* Energy Industries */}
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <Building2 className="h-5 w-5 text-emerald-600" />
-              <h3 className="font-semibold text-slate-900">Industries</h3>
+              <h3 className="font-semibold text-slate-900">Energy Industries</h3>
               {selectedIndustries.length > 0 && (
                 <span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-full">
                   {selectedIndustries.length}
@@ -794,11 +798,11 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
             </div>
           </div>
 
-          {/* Company Sizes */}
+          {/* Utility Sizes */}
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <Users className="h-5 w-5 text-blue-600" />
-              <h3 className="font-semibold text-slate-900">Company Size</h3>
+              <h3 className="font-semibold text-slate-900">Utility Size</h3>
               {selectedSizes.length > 0 && (
                 <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
                   {selectedSizes.length}
@@ -822,11 +826,11 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
             </div>
           </div>
 
-          {/* Technologies */}
+          {/* Energy Technologies */}
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <Code className="h-5 w-5 text-indigo-600" />
-              <h3 className="font-semibold text-slate-900">Technologies</h3>
+              <h3 className="font-semibold text-slate-900">Energy Technologies</h3>
               {selectedTechnologies.length > 0 && (
                 <span className="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full">
                   {selectedTechnologies.length}
@@ -878,11 +882,11 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
             </div>
           </div>
 
-          {/* Pain Points */}
+          {/* Energy Challenges */}
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <AlertCircle className="h-5 w-5 text-red-600" />
-              <h3 className="font-semibold text-slate-900">Pain Points</h3>
+              <h3 className="font-semibold text-slate-900">Energy Challenges</h3>
               {selectedPainPoints.length > 0 && (
                 <span className="px-2 py-1 bg-red-100 text-red-700 text-xs rounded-full">
                   {selectedPainPoints.length}
@@ -906,11 +910,11 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
             </div>
           </div>
 
-          {/* Locations */}
+          {/* Energy Markets */}
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <MapPin className="h-5 w-5 text-amber-600" />
-              <h3 className="font-semibold text-slate-900">Locations</h3>
+              <h3 className="font-semibold text-slate-900">Energy Markets</h3>
               {selectedLocations.length > 0 && (
                 <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs rounded-full">
                   {selectedLocations.length}
@@ -942,7 +946,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
           <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
             <div className="p-6 border-b border-slate-200">
               <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold text-slate-900">Save ICP Definition</h3>
+                <h3 className="text-xl font-bold text-slate-900">Save Energy Sector ICP</h3>
                 <button
                   onClick={() => setShowSaveModal(false)}
                   className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
@@ -962,7 +966,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
                     type="text"
                     value={icpName}
                     onChange={(e) => setIcpName(e.target.value)}
-                    placeholder="e.g., Healthcare Mid-Market Digital Transformation"
+                    placeholder="e.g., Regional Utilities Grid Modernization Focus"
                     className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -974,7 +978,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
                   <textarea
                     value={icpDescription}
                     onChange={(e) => setIcpDescription(e.target.value)}
-                    placeholder="Brief description of this ICP and when to use it..."
+                    placeholder="Brief description of this energy sector ICP and when to use it..."
                     rows={3}
                     className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                   />
@@ -1031,7 +1035,7 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
 
                   {/* Suggested Tags */}
                   <div>
-                    <p className="text-xs text-slate-600 mb-2">Suggested tags:</p>
+                    <p className="text-xs text-slate-600 mb-2">Suggested energy sector tags:</p>
                     <div className="flex flex-wrap gap-1">
                       {availableTags
                         .filter(tag => !icpTags.includes(tag))
@@ -1050,26 +1054,26 @@ export function ICPBuilder({ onNavigateToTab }: ICPBuilderProps) {
                 </div>
 
                 <div className="bg-slate-50 rounded-lg p-4">
-                  <h4 className="font-medium text-slate-900 mb-2">Criteria Summary</h4>
+                  <h4 className="font-medium text-slate-900 mb-2">Energy Sector Criteria Summary</h4>
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Industries:</span>
+                      <span className="text-slate-600">Energy Industries:</span>
                       <span className="font-medium">{selectedIndustries.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Technologies:</span>
+                      <span className="text-slate-600">Energy Technologies:</span>
                       <span className="font-medium">{selectedTechnologies.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Company Sizes:</span>
+                      <span className="text-slate-600">Utility Sizes:</span>
                       <span className="font-medium">{selectedSizes.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Locations:</span>
+                      <span className="text-slate-600">Energy Markets:</span>
                       <span className="font-medium">{selectedLocations.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Pain Points:</span>
+                      <span className="text-slate-600">Energy Challenges:</span>
                       <span className="font-medium">{selectedPainPoints.length}</span>
                     </div>
                     <div className="flex justify-between font-semibold">

@@ -1,95 +1,95 @@
 {
   "scored_leads": [
     {
-      "company": "TechFlow Solutions",
-      "overall_score": 0.92,
-      "icp_fit_score": 0.95,
-      "confidence_score": 0.88,
-      "signal_strength": 0.93,
+      "company": "GridTech Solutions",
+      "overall_score": 0.94,
+      "icp_fit_score": 0.96,
+      "confidence_score": 0.91,
+      "signal_strength": 0.95,
       "scoring_breakdown": {
         "industry_match": 1.0,
-        "size_match": 0.9,
-        "tech_stack_match": 0.95,
-        "growth_signals": 0.9,
-        "contact_quality": 0.85,
-        "recent_activity": 0.95
+        "size_match": 0.95,
+        "tech_stack_match": 0.92,
+        "growth_signals": 0.96,
+        "contact_quality": 0.89,
+        "recent_activity": 0.97
       },
       "priority": "High",
-      "recommended_action": "Immediate outreach",
+      "recommended_action": "Immediate outreach - grid modernization focus",
       "confidence_factors": [
-        "Verified email addresses",
-        "Recent funding announcement",
-        "Active hiring in target roles",
-        "Strong tech stack alignment"
+        "Verified utility partnerships",
+        "Recent Series B funding",
+        "Active hiring in grid analytics",
+        "Strong SCADA/smart grid alignment"
       ]
     },
     {
-      "company": "DataStream Analytics",
-      "overall_score": 0.86,
-      "icp_fit_score": 0.85,
-      "confidence_score": 0.87,
-      "signal_strength": 0.86,
-      "scoring_breakdown": {
-        "industry_match": 0.8,
-        "size_match": 0.85,
-        "tech_stack_match": 0.9,
-        "growth_signals": 0.85,
-        "contact_quality": 0.9,
-        "recent_activity": 0.8
-      },
-      "priority": "High",
-      "recommended_action": "Schedule discovery call",
-      "confidence_factors": [
-        "Healthcare industry expertise",
-        "Strong leadership team",
-        "Recent compliance achievements",
-        "Growing customer base"
-      ]
-    },
-    {
-      "company": "CloudScale Technologies",
+      "company": "CleanPower Analytics",
       "overall_score": 0.89,
-      "icp_fit_score": 0.9,
-      "confidence_score": 0.88,
+      "icp_fit_score": 0.88,
+      "confidence_score": 0.90,
       "signal_strength": 0.89,
       "scoring_breakdown": {
         "industry_match": 0.95,
         "size_match": 0.85,
-        "tech_stack_match": 0.9,
-        "growth_signals": 0.95,
-        "contact_quality": 0.85,
+        "tech_stack_match": 0.88,
+        "growth_signals": 0.92,
+        "contact_quality": 0.91,
         "recent_activity": 0.85
       },
       "priority": "High",
-      "recommended_action": "Enterprise approach",
+      "recommended_action": "Schedule renewable energy integration demo",
       "confidence_factors": [
-        "Large Series B funding",
-        "Enterprise security compliance",
-        "Financial services focus",
-        "Experienced founding team"
+        "CAISO leadership background",
+        "Strong renewable energy focus",
+        "Recent utility customer wins",
+        "AI/ML forecasting capabilities"
       ]
     },
     {
-      "company": "InnovateRetail",
-      "overall_score": 0.78,
-      "icp_fit_score": 0.75,
-      "confidence_score": 0.8,
-      "signal_strength": 0.8,
+      "company": "EnergyFlow Systems",
+      "overall_score": 0.86,
+      "icp_fit_score": 0.89,
+      "confidence_score": 0.84,
+      "signal_strength": 0.85,
       "scoring_breakdown": {
-        "industry_match": 0.7,
-        "size_match": 0.8,
-        "tech_stack_match": 0.75,
-        "growth_signals": 0.85,
-        "contact_quality": 0.75,
-        "recent_activity": 0.8
+        "industry_match": 0.92,
+        "size_match": 0.88,
+        "tech_stack_match": 0.82,
+        "growth_signals": 0.87,
+        "contact_quality": 0.86,
+        "recent_activity": 0.81
+      },
+      "priority": "High",
+      "recommended_action": "Focus on demand response solutions",
+      "confidence_factors": [
+        "NERC CIP compliance achievement",
+        "IoT and smart meter expertise",
+        "Demand response program launches",
+        "Established utility partnerships"
+      ]
+    },
+    {
+      "company": "PowerGrid Dynamics",
+      "overall_score": 0.82,
+      "icp_fit_score": 0.84,
+      "confidence_score": 0.81,
+      "signal_strength": 0.81,
+      "scoring_breakdown": {
+        "industry_match": 0.88,
+        "size_match": 0.78,
+        "tech_stack_match": 0.85,
+        "growth_signals": 0.89,
+        "contact_quality": 0.79,
+        "recent_activity": 0.83
       },
       "priority": "Medium",
-      "recommended_action": "Nurture campaign",
+      "recommended_action": "Energy storage integration consultation",
       "confidence_factors": [
-        "Rapid customer growth",
-        "AI/ML technology focus",
+        "Strong energy storage focus",
+        "Virtual power plant innovations",
         "Series A funding secured",
-        "Active product development"
+        "Grid services revenue model"
       ]
     }
   ]

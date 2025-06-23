@@ -39,8 +39,8 @@ function App() {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
                 <img 
-                  src="/images/Lyzr-logo cropped.webp" 
-                  alt="Lyzr" 
+                  src="/images/Novitium-Energy-logo-square.jpeg" 
+                  alt="Novitium Energy" 
                   className="h-8 w-auto"
                 />
                 <div className="w-px h-8 bg-slate-300"></div>
@@ -183,8 +183,8 @@ function App() {
       <footer className="bg-white border-t border-slate-200 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="text-center text-sm text-slate-600">
-            <p>SmartICP • Powered by Lyzr • Enterprise-ready with advanced automation</p>
-            <p className="mt-1">Email orchestration • Competitive intelligence • Predictive analytics • Real-time integrations</p>
+            <p>SmartICP • Powered by Novitium Energy • Enterprise-ready with advanced automation</p>
+            <p className="mt-1">Energy sector intelligence • Grid modernization leads • Clean tech partnerships • Regulatory compliance tracking</p>
           </div>
         </div>
       </footer>

@@ -1,68 +1,68 @@
 {
   "signals": [
     {
-      "company": "TechFlow Solutions",
+      "company": "GridTech Solutions",
       "hiring_signals": [
-        "Senior React Developer - Remote",
-        "DevOps Engineer - AWS/Kubernetes",
-        "Product Manager - B2B SaaS"
+        "Senior Grid Analytics Engineer",
+        "Power Systems Software Developer",
+        "Utility Solutions Architect"
       ],
-      "tech_stack": ["React", "Node.js", "AWS", "MongoDB", "Stripe"],
+      "tech_stack": ["Python", "SCADA", "AWS", "PostgreSQL", "Kubernetes"],
       "growth_indicators": [
-        "3x team growth in last 6 months",
-        "New office opening in Austin",
-        "Partnership with Salesforce announced"
-      ],
-      "recent_funding": "$15M Series A",
-      "headcount_growth": "+45% YoY"
-    },
-    {
-      "company": "DataStream Analytics",
-      "hiring_signals": [
-        "Senior Full Stack Developer",
-        "Data Scientist - Healthcare",
-        "Customer Success Manager"
-      ],
-      "tech_stack": ["Python", "React", "PostgreSQL", "AWS", "Docker"],
-      "growth_indicators": [
-        "New enterprise clients onboarded",
-        "HIPAA compliance certification completed",
-        "Product expansion into telehealth"
-      ],
-      "recent_funding": "$8M Seed",
-      "headcount_growth": "+60% YoY"
-    },
-    {
-      "company": "CloudScale Technologies",
-      "hiring_signals": [
-        "Platform Engineer - Kubernetes",
-        "Security Engineer - FinTech",
-        "Solutions Architect"
-      ],
-      "tech_stack": ["Kubernetes", "Go", "React", "PostgreSQL", "Terraform"],
-      "growth_indicators": [
-        "SOC 2 Type II certification",
-        "Multi-region deployment completed",
-        "Banking partnerships established"
+        "Partnership with major utility announced",
+        "Grid modernization contract awarded",
+        "Expanded into 3 new ISO markets"
       ],
       "recent_funding": "$25M Series B",
-      "headcount_growth": "+35% YoY"
+      "headcount_growth": "+65% YoY"
     },
     {
-      "company": "InnovateRetail",
+      "company": "CleanPower Analytics",
       "hiring_signals": [
-        "Machine Learning Engineer",
-        "Frontend Developer - React",
-        "Sales Development Representative"
+        "Renewable Energy Data Scientist",
+        "Grid Integration Engineer",
+        "Customer Success Manager - Utilities"
       ],
-      "tech_stack": ["Python", "React", "TensorFlow", "AWS", "Redis"],
+      "tech_stack": ["Python", "TensorFlow", "Azure", "InfluxDB", "React"],
       "growth_indicators": [
-        "AI model accuracy improved by 25%",
-        "Integration with major POS systems",
-        "Customer base doubled in Q4"
+        "10 new utility customers onboarded",
+        "ISO 27001 certification completed",
+        "Renewable forecasting accuracy improved 20%"
       ],
-      "recent_funding": "$12M Series A",
+      "recent_funding": "$18M Series A",
       "headcount_growth": "+80% YoY"
+    },
+    {
+      "company": "EnergyFlow Systems",
+      "hiring_signals": [
+        "Smart Grid Engineer - IoT",
+        "Demand Response Product Manager",
+        "Utility Sales Director"
+      ],
+      "tech_stack": ["IoT", "MQTT", "Docker", "TimescaleDB", "Vue.js"],
+      "growth_indicators": [
+        "NERC CIP compliance certification",
+        "Demand response program launched",
+        "Smart meter integration partnerships"
+      ],
+      "recent_funding": "$32M Series C",
+      "headcount_growth": "+50% YoY"
+    },
+    {
+      "company": "PowerGrid Dynamics",
+      "hiring_signals": [
+        "Energy Storage Software Engineer",
+        "Grid Operations Specialist",
+        "Business Development Manager - Energy"
+      ],
+      "tech_stack": ["Go", "React", "PostgreSQL", "Apache Kafka", "Grafana"],
+      "growth_indicators": [
+        "Battery storage management system deployed",
+        "Virtual power plant pilot launched",
+        "Grid services revenue stream established"
+      ],
+      "recent_funding": "$15M Series A",
+      "headcount_growth": "+90% YoY"
     }
   ]
 }

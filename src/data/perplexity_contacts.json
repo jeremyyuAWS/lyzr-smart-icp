@@ -1,78 +1,78 @@
 {
   "contacts": [
     {
-      "company": "TechFlow Solutions",
+      "company": "GridTech Solutions",
       "contacts": [
         {
-          "name": "Sarah Chen",
+          "name": "Sarah Mitchell",
           "title": "CEO & Co-founder",
-          "email": "sarah@techflowsolutions.com",
-          "linkedin": "linkedin.com/in/sarahchen-tech",
-          "background": "Former VP Engineering at Stripe, Stanford CS"
+          "email": "sarah@gridtechsolutions.com",
+          "linkedin": "linkedin.com/in/sarahmitchell-grid",
+          "background": "Former VP Engineering at GE Grid Solutions, MIT Power Systems"
         },
         {
-          "name": "Michael Rodriguez",
-          "title": "VP of Sales",
-          "email": "michael.r@techflowsolutions.com",
-          "linkedin": "linkedin.com/in/mrodriguez-sales",
-          "background": "Ex-Salesforce, 10+ years in B2B SaaS"
-        }
-      ]
-    },
-    {
-      "company": "DataStream Analytics",
-      "contacts": [
-        {
-          "name": "Dr. Emily Watson",
-          "title": "CEO",
-          "email": "emily@datastreamanalytics.com",
-          "linkedin": "linkedin.com/in/emilywatson-md",
-          "background": "Former Chief Medical Officer, Johns Hopkins, Harvard MBA"
-        },
-        {
-          "name": "James Park",
-          "title": "CTO",
-          "email": "james@datastreamanalytics.com",
-          "linkedin": "linkedin.com/in/jamespark-cto",
-          "background": "Ex-Google Health, MIT PhD in Computer Science"
-        }
-      ]
-    },
-    {
-      "company": "CloudScale Technologies",
-      "contacts": [
-        {
-          "name": "Alex Thompson",
-          "title": "Founder & CEO",
-          "email": "alex@cloudscaletech.io",
-          "linkedin": "linkedin.com/in/alexthompson-fintech",
-          "background": "Former Goldman Sachs VP, Berkeley Engineering"
-        },
-        {
-          "name": "Lisa Zhang",
+          "name": "David Chen",
           "title": "VP of Product",
-          "email": "lisa@cloudscaletech.io",
-          "linkedin": "linkedin.com/in/lisazhang-product",
-          "background": "Ex-Square, specializes in financial infrastructure"
+          "email": "david.c@gridtechsolutions.com",
+          "linkedin": "linkedin.com/in/davidchen-energy",
+          "background": "Ex-Schneider Electric, 12+ years in grid automation"
         }
       ]
     },
     {
-      "company": "InnovateRetail",
+      "company": "CleanPower Analytics",
+      "contacts": [
+        {
+          "name": "Dr. Elena Rodriguez",
+          "title": "CEO",
+          "email": "elena@cleanpoweranalytics.com",
+          "linkedin": "linkedin.com/in/elenarodriguez-phd",
+          "background": "Former Director of Renewable Integration, CAISO, Stanford PhD"
+        },
+        {
+          "name": "Michael Thompson",
+          "title": "CTO",
+          "email": "michael@cleanpoweranalytics.com",
+          "linkedin": "linkedin.com/in/mthompson-cleantech",
+          "background": "Ex-Tesla Energy, UC Berkeley Engineering"
+        }
+      ]
+    },
+    {
+      "company": "EnergyFlow Systems",
       "contacts": [
         {
           "name": "Robert Kim",
-          "title": "CEO",
-          "email": "robert@innovateretail.com",
-          "linkedin": "linkedin.com/in/robertkim-retail",
-          "background": "Former VP at Target, Retail industry veteran"
+          "title": "Founder & CEO",
+          "email": "robert@energyflowsystems.io",
+          "linkedin": "linkedin.com/in/robertkim-smartgrid",
+          "background": "Former Principal Engineer at ABB, Georgia Tech Power Systems"
         },
         {
-          "name": "Anna Petrov",
-          "title": "Chief Data Scientist",
-          "email": "anna@innovateretail.com",
-          "linkedin": "linkedin.com/in/annapetrov-ml",
-          "background": "Ex-Amazon ML team, PhD in Statistics from Stanford"
+          "name": "Jennifer Park",
+          "title": "VP of Business Development",
+          "email": "jennifer@energyflowsystems.io",
+          "linkedin": "linkedin.com/in/jenniferpark-utilities",
+          "background": "Ex-Itron, 15+ years in utility customer relationships"
+        }
+      ]
+    },
+    {
+      "company": "PowerGrid Dynamics",
+      "contacts": [
+        {
+          "name": "Alex Johnson",
+          "title": "CEO",
+          "email": "alex@powergridynamics.com",
+          "linkedin": "linkedin.com/in/alexjohnson-energy",
+          "background": "Former VP at Fluence, Carnegie Mellon Energy Systems"
+        },
+        {
+          "name": "Lisa Zhang",
+          "title": "Chief Technology Officer",
+          "email": "lisa@powergridynamics.com",
+          "linkedin": "linkedin.com/in/lisazhang-storage",
+          "background": "Ex-Stem Inc, specializes in energy storage optimization"
         }
       ]
     }

@@ -1,40 +1,40 @@
 {
   "results": [
     {
-      "company_name": "TechFlow Solutions",
-      "domain": "techflowsolutions.com",
+      "company_name": "GridTech Solutions",
+      "domain": "gridtechsolutions.com",
       "source": "Exa AI Search",
-      "similarity_score": 0.92,
-      "description": "Enterprise workflow automation platform built on React and Node.js",
-      "founded": "2021",
-      "funding": "$15M Series A"
-    },
-    {
-      "company_name": "DataStream Analytics",
-      "domain": "datastreamanalytics.com",
-      "source": "Exa AI Search",
-      "similarity_score": 0.88,
-      "description": "Real-time data processing and visualization for healthcare organizations",
-      "founded": "2020",
-      "funding": "$8M Seed"
-    },
-    {
-      "company_name": "CloudScale Technologies",
-      "domain": "cloudscaletech.io",
-      "source": "Exa AI Search",
-      "similarity_score": 0.85,
-      "description": "Kubernetes-native platform for financial services infrastructure",
+      "similarity_score": 0.94,
+      "description": "Advanced grid analytics and automation platform for utility modernization",
       "founded": "2019",
       "funding": "$25M Series B"
     },
     {
-      "company_name": "InnovateRetail",
-      "domain": "innovateretail.com",
+      "company_name": "CleanPower Analytics",
+      "domain": "cleanpoweranalytics.com",
       "source": "Exa AI Search",
-      "similarity_score": 0.82,
-      "description": "AI-powered inventory management and customer analytics for retail chains",
-      "founded": "2022",
-      "funding": "$12M Series A"
+      "similarity_score": 0.91,
+      "description": "AI-powered renewable energy forecasting and grid integration software",
+      "founded": "2020",
+      "funding": "$18M Series A"
+    },
+    {
+      "company_name": "EnergyFlow Systems",
+      "domain": "energyflowsystems.io",
+      "source": "Exa AI Search",
+      "similarity_score": 0.88,
+      "description": "Smart grid infrastructure and demand response management platform",
+      "founded": "2018",
+      "funding": "$32M Series C"
+    },
+    {
+      "company_name": "PowerGrid Dynamics",
+      "domain": "powergridynamics.com",
+      "source": "Exa AI Search",
+      "similarity_score": 0.85,
+      "description": "Real-time grid optimization and energy storage management solutions",
+      "founded": "2021",
+      "funding": "$15M Series A"
     }
   ]
 }
